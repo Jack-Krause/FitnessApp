@@ -16,7 +16,7 @@ app.use("/users", userRoutes);
 
 const port = 4000;
 const host = "127.0.0.1";
-const url = "mongodb://localhost:27017/fitnessdata";
+const url = "mongodb://127.0.0.1:27017/fitnessdata";
 
 mongoose.connect(url, {
 })
