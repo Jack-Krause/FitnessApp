@@ -9,10 +9,11 @@ const path = require("path");
 
 app.use(cors());
 app.use(bodyParser.json());
+//add controllers with app.use
 
 const port = 4000;
 const host = "127.0.0.1";
-const url = "mongodb://localhost:27017";
+const url = "mongodb://localhost:27017/fitnessdata";
 
 mongoose.connect(url, {
 })
@@ -28,7 +29,3 @@ mongoose.connect(url, {
 app.listen(port, () => {
     console.log("App listening at http://%s:%s", host, port);
 });
-
-// Request methods for CRUDL actions:
-
-
