@@ -4,12 +4,15 @@ var app = express();
 var fs = require("fs");
 var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
-//models if needed
+//models/routes if needed
+const userRoutes = require("./routes/user.routes");
+
 const path = require("path");
 
 app.use(cors());
 app.use(bodyParser.json());
 //add controllers with app.use
+app.use("/users", userRoutes);
 
 const port = 4000;
 const host = "127.0.0.1";
