@@ -7,6 +7,7 @@ import NavHead from "./components/NavHead";
 import { AuthenticatedViewProvider } from "./contexts/AuthenticatedViewProvider";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
+// Authenticated Route is entry point - user either to sign in or home page
 const App = () => {
   return (
     <AuthenticatedViewProvider>
