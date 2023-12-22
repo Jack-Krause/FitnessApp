@@ -13,9 +13,10 @@ const App = () => {
     <AuthenticatedViewProvider>
       <Router>
         <div className="App">
-          {/* <NavHead /> */}
+          <NavHead />
           <Routes>
-            <Route path="/" element={<AuthenticatedRoute />} />
+
+            <Route path="*" element={<AuthenticatedRoute />} />
           </Routes>
         </div>
       </Router>

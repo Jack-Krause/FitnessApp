@@ -15,7 +15,9 @@ const SignIn = () => {
 
     return (
         <div>
-    
+            <main>
+                <h1>Sign In</h1>
+            </main>
         </div>
     );
 };
