@@ -24,4 +24,4 @@ export const AuthenticatedViewProvider = ({ children }) => {
 
 export const useAuthenticatedView = () => {
     return useContext(AuthenticatedViewContext);
-}
+};

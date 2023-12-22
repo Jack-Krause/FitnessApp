@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
 
 const Home = () => {
+    console.log("home");
     return (
 
         <div>
@@ -9,7 +10,7 @@ const Home = () => {
                 <h1>Home Page</h1>
             </main>
         </div>
-    )
+    );
 };
 
 

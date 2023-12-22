@@ -19,10 +19,10 @@ const AuthenticatedRoute = () => {
     return (
         <Routes>
             <Route
-                to = "/"
+                path = "/"
                 element = { userAuthenticated ? <Home /> : <Navigate to="/signin" /> }
             />
-            <Route to = "/signin" element = { <SignIn /> } />
+            <Route path = "/signin" element = { <SignIn /> } />
         </Routes>
     );
 };

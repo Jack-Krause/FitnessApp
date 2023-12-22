@@ -9,14 +9,14 @@ import AuthenticatedRoute from "./components/AuthenticatedRoute";
 
 // Authenticated Route is entry point - user either to sign in or home page
 const App = () => {
+  console.log("App");
   return (
     <AuthenticatedViewProvider>
       <Router>
         <div className="App">
           <NavHead />
           <Routes>
-
-            <Route path="*" element={<AuthenticatedRoute />} />
+            <Route path= "/*" element ={ <AuthenticatedRoute /> } />
           </Routes>
         </div>
       </Router>
