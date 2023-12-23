@@ -20,7 +20,7 @@ const SignIn = () => {
 	});
 
 	// message to show user on response from backend | usestate methods/vars
-	const { postStatusMessage, setPostStatusMessage } = useState("");
+	const [ postStatusMessage, setPostStatusMessage ] = useState("");
 
 	// Populate info to be sent to backend
   const handleFormChange = (event) => {
@@ -53,6 +53,8 @@ const SignIn = () => {
 
 	// Send user info to api service (for GET request)
 	const handleSignIn = () => {
+
+		console.log(userData.email, userData.password);
 
 		signIn(userData.email, userData.password)
 		.then((response) => {
@@ -120,37 +122,37 @@ const SignIn = () => {
               </h2>
               <form onSubmit={handleUserFormSubmit}>
                 <div className="form-group">
-                  <label htmlFor="id" className="form-label">
+                  <label htmlFor="email" className="form-label">
                     E-mail
                   </label>
                   <input
                     type="text"
-                    id="id"
-                    name="id"
+                    id="email"
+                    name="email"
                     value={ userData.email }
                     onChange={handleFormChange}
                     placeholder="user@email.com"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="title" className="form-label">
+                  <label htmlFor="password" className="form-label">
                     Password
                   </label>
                   <input
                     type="text"
-                    id="title"
-                    name="title"
+                    id="password"
+                    name="password"
                     value={ userData.password }
                     onChange={handleFormChange}
                     placeholder="must be unique"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="price" className="form-label">
+                  <label htmlFor="name" className="form-label">
                     Name
                   </label>
                   <input
                     type="text"
-                    id="price"
-                    name="price"
+                    id="name"
+                    name="name"
                     value={ userData.name }
                     onChange={handleFormChange}
                     placeholder="enter first, last or both names"
@@ -167,7 +169,7 @@ const SignIn = () => {
               {postStatusMessage && (
                 <div
                   className={`alert ${
-                    postStatusMessage.includes("success")
+                    postStatusMessage.toLowerCase().includes("success")
                       ? "alert-success"
                       : "alert-danger"
                   }`}

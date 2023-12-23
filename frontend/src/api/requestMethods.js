@@ -2,9 +2,13 @@ import React from "react";
 import axios from "axios";
 
 // GET request to sign in user
-export const signIn = async (email, password) => {
+export const signIn = async (inputEmail, inputPassword) => {
     try {
-        const response = await axios.get(`http://127.0.0.1:4000/`)
+        const response = await axios.post("http://127.0.0.1:4000/", {
+            email: inputEmail,
+            password: inputPassword
+        });
+        return response;
     } catch (err) {
         console.error("[api] error", err);
         throw err;
