@@ -12,6 +12,6 @@ export const signIn = async (email, password) => {
 };
 
 // POST request to add user's info
-export const register = async (email, password, name) => {
+// export const register = async (email, password, name) => {
 
-};
+// };

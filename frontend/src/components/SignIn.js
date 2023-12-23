@@ -2,6 +2,8 @@ import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
+import { signIn } from "../api/requestMethods";
+
 
 // UI/methods for user accessing the rest of the app
 const SignIn = () => {
@@ -20,7 +22,6 @@ const SignIn = () => {
 	// message to show user on response from backend | usestate methods/vars
 	const { postStatusMessage, setPostStatusMessage } = useState("");
 
-
 	// Populate info to be sent to backend
   const handleFormChange = (event) => {
     event.preventDefault();
@@ -35,21 +36,67 @@ const SignIn = () => {
 		const intent = event.nativeEvent.submitter.name;
 
 		if (intent === "signIn") {
+			if (validateSignIn) {
 			handleSignIn();
+			} else {
+				setPostStatusMessage("Empty user information. Make sure to include email and password");
+			}
 		} else if (intent === "register") {
-			handleRegistration();
+			if (validateReg) {
+				handleRegistration();
+			} else {
+				setPostStatusMessage("Empty user information. Make sure fill all boxes.");
+			}
 		}
 
 	};
 
-	// Send request for sign in (GET)
+	// Send user info to api service (for GET request)
 	const handleSignIn = () => {
+
+		signIn(userData.email, userData.password)
+		.then((response) => {
+			console.log("Sign-in success:", response.data);
+			
+			setPostStatusMessage(
+				"Success signing in! You may continue to the rest of the app."
+			);
+			// TODO: Move to the rest of the app
+			// TODO: Set user sign in info
+
+		})
+		.catch((error) => {
+			console.error("Sign in error: ", error);
+			setPostStatusMessage(
+				"Error signing in. Double check your info is correct."
+			);
+		});
 
 	};
 
-	// Send request for registration (POST)
+	// Send user info to api service (for POST request)
 	const handleRegistration = () => {
 
+	};
+
+	// Simple form validation for now - for registration
+	const validateReg = () => {
+		return (
+			userData.email
+			&&
+			userData.password
+			&&
+			userData.name
+		);
+	};
+
+	// Simple form validation - for sign in
+	const validateSignIn = () => {
+		return (
+			userData.email
+			&&
+			userData.password
+		);
 	};
 
   return (
@@ -80,7 +127,7 @@ const SignIn = () => {
                     type="text"
                     id="id"
                     name="id"
-                    // value={ }
+                    value={ userData.email }
                     onChange={handleFormChange}
                     placeholder="user@email.com"
                     className="form-control mb-3"
@@ -92,7 +139,7 @@ const SignIn = () => {
                     type="text"
                     id="title"
                     name="title"
-                    // value={productData.title}
+                    value={ userData.password }
                     onChange={handleFormChange}
                     placeholder="must be unique"
                     className="form-control mb-3"
@@ -104,7 +151,7 @@ const SignIn = () => {
                     type="text"
                     id="price"
                     name="price"
-                    // value={productData.price}
+                    value={ userData.name }
                     onChange={handleFormChange}
                     placeholder="enter first, last or both names"
                     className="form-control mb-3"
