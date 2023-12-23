@@ -3,18 +3,23 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
 
+// UI/methods for user accessing the rest of the app
 const SignIn = () => {
 
-	// Will be set upon validation from backend
+	// Will be set upon validation from backend | context methods/vars
   const { userEmail, setUserEmail, userAuthenticated, setUserAuthenticated } =
     useAuthenticatedView();
 
-	// Temporary state for sending to the backend and editing my user
+	// Temporary state for sending to the backend and editing my user | usestate methods/vars
 	const [ userData, setUserData ] = useState( {
 		email: "",
 		password: "",
 		name: "",
 	});
+
+	// message to show user on response from backend | usestate methods/vars
+	const { postStatusMessage, setPostStatusMessage } = useState("");
+
 
 	// Populate info to be sent to backend
   const handleFormChange = (event) => {
@@ -23,30 +28,29 @@ const SignIn = () => {
 		setUserData({ ...userData, [name]: value});
   };
 
+	// Send to backend sign in or registration request depending on button pressed
   const handleUserFormSubmit = (event) => {
 		event.preventDefault();
 
 		const intent = event.nativeEvent.submitter.name;
 
 		if (intent === "signIn") {
-			
-			// call sign in function
+			handleSignIn();
 		} else if (intent === "register") {
-			
-			// call register function
+			handleRegistration();
 		}
 
 	};
 
+	// Send request for sign in (GET)
 	const handleSignIn = () => {
 
 	};
 
+	// Send request for registration (POST)
 	const handleRegistration = () => {
 
 	};
-
-  const { postStatusMessage } = useState("");
 
   return (
     <div>
