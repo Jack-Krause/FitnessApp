@@ -52,7 +52,7 @@ const SignIn = () => {
     }
   };
 
-  // Send user info to api service (for GET request)
+  // Send user info to api service (for POST request)
   const handleSignIn = () => {
     console.log(userData.email, userData.password);
 
@@ -61,13 +61,19 @@ const SignIn = () => {
         console.log("Sign-in success:", response.data);
 
         setPostStatusMessage(
-          "Success signing in! You may continue to the rest of the app."
+          "Success signing in! You are being redirected to the rest of the app."
         );
         // TODO: Move to the rest of the app
-        // TODO: Set user sign in info
+        // Set user sign in info
+        setTimeout(function () {
+          setUserAuthenticated(true);
+          setUserEmail(userData.email);
+        }, 3000);
+        clearTimeout();
       })
       .catch((error) => {
         console.error("Sign in error:", error);
+
         setPostStatusMessage(
           "Error signing in. Double check your info is correct."
         );
@@ -83,14 +89,20 @@ const SignIn = () => {
         console.log("Sign-in success:", response.data);
 
         setPostStatusMessage(
-          "Success registering! You may continue to the rest of the app."
+          "Success registering! You are being redirected to the rest of the app."
         );
-        //TODO: rest of the app, set user sign in info
+        // TODO: Move to the rest of the app
+        // Set user sign in info
+        setTimeout(function () {
+          setUserAuthenticated(true);
+          setUserEmail(userData.email);
+        }, 3000);
+        clearTimeout();
       })
       .catch((error) => {
         console.error("Registration error:", error);
         setPostStatusMessage(
-          "Error Registering in. Check that all fields are filled out."
+          "Error Registering. Check that all fields are filled out."
         );
       });
   };

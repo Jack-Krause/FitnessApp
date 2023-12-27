@@ -15,7 +15,6 @@ const App = () => {
     <AuthenticatedViewProvider>
       <Router>
         <div className="App">
-          <NavHead />
           <Routes>
             <Route path= "/*" element ={ <AuthenticatedRoute /> } />
           </Routes>
