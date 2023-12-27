@@ -11,8 +11,10 @@ const path = require("path");
 
 app.use(cors());
 app.use(bodyParser.json());
+
 //add controllers with app.use
-app.use("/", userRoutes);
+app.use("/user", userRoutes);
+app.use("/user")
 
 const port = 4000;
 const host = "127.0.0.1";

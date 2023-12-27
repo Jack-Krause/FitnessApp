@@ -20,6 +20,7 @@ const UserController = {
       const user = await User.findOne({ email, password });
 
       if (user) {
+        // 200 status code: accepted
         res.status(200).send(user);
       } else {
         res.status(404).send("User not found");
@@ -27,7 +28,27 @@ const UserController = {
     } catch (error) {
       res.status(500).send(error.message);
     }
-  }
+  },
+
+  createUser: async (req, res) => {
+    try {
+      const { email, password, name } = req.body;
+      console.log(email, password, name);
+
+      const userToPost = new User({
+        email,
+        password,
+        name,
+      });
+
+      await userToPost.save();
+      
+      // 201 status code: created
+      res.status(201).send("User creation success");
+    } catch (error) {
+      res.status(500).send(error.message);
+    }
+  },
 };
 
 module.exports = UserController;
