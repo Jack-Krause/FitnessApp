@@ -1,6 +1,7 @@
 const User = require("../models/user.model");
 
 const UserController = {
+
   // Add CRUDL methods for User
   getAllUsers: async (req, res) => {
     try {
@@ -38,13 +39,13 @@ const UserController = {
       const userToPost = new User({
         email,
         password,
-        name,
+        name
       });
 
       await userToPost.save();
-      
       // 201 status code: created
       res.status(201).send("User creation success");
+      
     } catch (error) {
       res.status(500).send(error.message);
     }

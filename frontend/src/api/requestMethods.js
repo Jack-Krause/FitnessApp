@@ -18,6 +18,7 @@ export const signIn = async (inputEmail, inputPassword) => {
 // POST request to add user info
 export const register = async (inputEmail, inputPassword, inputName) => {
     try {
+        console.log(inputEmail, inputPassword, inputName);
         const response = await axios.post("http://127.0.0.1:4000/user/register", {
             email: inputEmail,
             password: inputPassword,
