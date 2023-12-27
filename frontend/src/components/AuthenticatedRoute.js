@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import { Router, Routes, Navigate, Route } from "react-router-dom";
 import { AuthenticatedViewProvider } from "../contexts/AuthenticatedViewProvider";
 import NavHead from "./NavHead";
+import SignInNavHead from "./SignInNavHead";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
 import SignIn from "./SignIn";
 import Home from "./Home";
@@ -24,7 +25,7 @@ const AuthenticatedRoute = () => {
             </>
           ) : (
             <>
-                {/* <SignInNavHead /> */}
+                <SignInNavHead />
                 <SignIn />
             </>
           )
