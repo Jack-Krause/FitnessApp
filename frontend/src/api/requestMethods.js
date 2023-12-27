@@ -16,8 +16,17 @@ export const signIn = async (inputEmail, inputPassword) => {
 };
 
 // POST request to add user info
-export const register = async (email, password, name) => {
+export const register = async (inputEmail, inputPassword, inputName) => {
     try {
-        const response = await axios.post
+        const response = await axios.post("http://127.0.0.1:4000/user/register", {
+            email: inputEmail,
+            password: inputPassword,
+            name: inputName
+        });
+
+        return response;
+    } catch (err) {
+        console.error("[api] error", err);
+        throw err;
     }
 };

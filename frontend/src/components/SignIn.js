@@ -2,104 +2,108 @@ import React, { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
-import { signIn } from "../api/requestMethods";
-
+import { signIn, register } from "../api/requestMethods";
 
 // UI/methods for user accessing the rest of the app
 const SignIn = () => {
-
-	// Will be set upon validation from backend | context methods/vars
+  // Will be set upon validation from backend | context methods/vars
   const { userEmail, setUserEmail, userAuthenticated, setUserAuthenticated } =
     useAuthenticatedView();
 
-	// Temporary state for sending to the backend and editing my user | usestate methods/vars
-	const [ userData, setUserData ] = useState( {
-		email: "",
-		password: "",
-		name: "",
-	});
+  // Temporary state for sending to the backend and editing my user | usestate methods/vars
+  const [userData, setUserData] = useState({
+    email: "",
+    password: "",
+    name: "",
+  });
 
-	// message to show user on response from backend | usestate methods/vars
-	const [ postStatusMessage, setPostStatusMessage ] = useState("");
+  // message to show user on response from backend | usestate methods/vars
+  const [postStatusMessage, setPostStatusMessage] = useState("");
 
-	// Populate info to be sent to backend
+  // Populate info to be sent to backend
   const handleFormChange = (event) => {
     event.preventDefault();
-		const { name, value } = event.target;
-		setUserData({ ...userData, [name]: value});
+    const { name, value } = event.target;
+    setUserData({ ...userData, [name]: value });
   };
 
-	// Send to backend sign in or registration request depending on button pressed
+  // Send to backend sign in or registration request depending on button pressed
   const handleUserFormSubmit = (event) => {
-		event.preventDefault();
+    event.preventDefault();
 
-		const intent = event.nativeEvent.submitter.name;
+    const intent = event.nativeEvent.submitter.name;
 
-		if (intent === "signIn") {
-			if (validateSignIn) {
-			handleSignIn();
-			} else {
-				setPostStatusMessage("Empty user information. Make sure to include email and password");
-			}
-		} else if (intent === "register") {
-			if (validateReg) {
-				handleRegistration();
-			} else {
-				setPostStatusMessage("Empty user information. Make sure fill all boxes.");
-			}
-		}
+    if (intent === "signIn") {
+      if (validateSignIn) {
+        handleSignIn();
+      } else {
+        setPostStatusMessage(
+          "Empty user information. Make sure to include email and password"
+        );
+      }
+    } else if (intent === "register") {
+      if (validateReg) {
+        handleRegistration();
+      } else {
+        setPostStatusMessage(
+          "Empty user information. Make sure fill all boxes."
+        );
+      }
+    }
+  };
 
-	};
+  // Send user info to api service (for GET request)
+  const handleSignIn = () => {
+    console.log(userData.email, userData.password);
 
-	// Send user info to api service (for GET request)
-	const handleSignIn = () => {
+    signIn(userData.email, userData.password)
+      .then((response) => {
+        console.log("Sign-in success:", response.data);
 
-		console.log(userData.email, userData.password);
+        setPostStatusMessage(
+          "Success signing in! You may continue to the rest of the app."
+        );
+        // TODO: Move to the rest of the app
+        // TODO: Set user sign in info
+      })
+      .catch((error) => {
+        console.error("Sign in error:", error);
+        setPostStatusMessage(
+          "Error signing in. Double check your info is correct."
+        );
+      });
+  };
 
-		signIn(userData.email, userData.password)
-		.then((response) => {
-			console.log("Sign-in success:", response.data);
-			
-			setPostStatusMessage(
-				"Success signing in! You may continue to the rest of the app."
-			);
-			// TODO: Move to the rest of the app
-			// TODO: Set user sign in info
+  // Send user info to api service (for POST request)
+  const handleRegistration = () => {
+    console.log(userData.email, userData.password, userData.password);
 
-		})
-		.catch((error) => {
-			console.error("Sign in error: ", error);
-			setPostStatusMessage(
-				"Error signing in. Double check your info is correct."
-			);
-		});
+    register(userData.email, userData.password, userData.name)
+      .then((response) => {
+        console.log("Sign-in success:", response.data);
 
-	};
+        setPostStatusMessage(
+          "Success registering! You may continue to the rest of the app."
+        );
+        //TODO: rest of the app, set user sign in info
+      })
+      .catch((error) => {
+        console.error("Registration error:", error);
+        setPostStatusMessage(
+          "Error Registering in. Check that all fields are filled out."
+        );
+      });
+  };
 
-	// Send user info to api service (for POST request)
-	const handleRegistration = () => {
+  // Simple form validation for now - for registration
+  const validateReg = () => {
+    return userData.email && userData.password && userData.name;
+  };
 
-	};
-
-	// Simple form validation for now - for registration
-	const validateReg = () => {
-		return (
-			userData.email
-			&&
-			userData.password
-			&&
-			userData.name
-		);
-	};
-
-	// Simple form validation - for sign in
-	const validateSignIn = () => {
-		return (
-			userData.email
-			&&
-			userData.password
-		);
-	};
+  // Simple form validation - for sign in
+  const validateSignIn = () => {
+    return userData.email && userData.password;
+  };
 
   return (
     <div>
@@ -129,7 +133,7 @@ const SignIn = () => {
                     type="text"
                     id="email"
                     name="email"
-                    value={ userData.email }
+                    value={userData.email}
                     onChange={handleFormChange}
                     placeholder="user@email.com"
                     className="form-control mb-3"
@@ -141,7 +145,7 @@ const SignIn = () => {
                     type="text"
                     id="password"
                     name="password"
-                    value={ userData.password }
+                    value={userData.password}
                     onChange={handleFormChange}
                     placeholder="must be unique"
                     className="form-control mb-3"
@@ -153,15 +157,15 @@ const SignIn = () => {
                     type="text"
                     id="name"
                     name="name"
-                    value={ userData.name }
+                    value={userData.name}
                     onChange={handleFormChange}
                     placeholder="enter first, last or both names"
                     className="form-control mb-3"
                   />
-                  <button type="submit" className="p-3 m-2" name = "signIn">
+                  <button type="submit" className="p-3 m-2" name="signIn">
                     Sign In
                   </button>
-                  <button type="submit" className="p-3 m-2" name = "register">
+                  <button type="submit" className="p-3 m-2" name="register">
                     Register
                   </button>
                 </div>
