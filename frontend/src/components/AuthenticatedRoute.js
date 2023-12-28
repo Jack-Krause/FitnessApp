@@ -15,23 +15,7 @@ const AuthenticatedRoute = () => {
 
   return (
     <Routes>
-      <Route
-        path="/"
-        element={
-          userAuthenticated ? (
-            <>
-              <NavHead />
-              <Home />
-            </>
-          ) : (
-            <>
-              <SignInNavHead />
-              <SignIn />
-            </>
-          )
-        }
-      />
-      {/* Removed route for sign in */}
+      <Route path="/" element={userAuthenticated ? <Home /> : <SignIn />} />
     </Routes>
   );
 };

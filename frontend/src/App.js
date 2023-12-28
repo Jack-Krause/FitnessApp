@@ -5,26 +5,31 @@ import "./index.css";
 
 // import views:
 import NavHead from "./components/NavHead";
-import { AuthenticatedViewProvider } from "./contexts/AuthenticatedViewProvider";
+import {
+  AuthenticatedViewProvider,
+  useAuthenticatedView,
+} from "./contexts/AuthenticatedViewProvider";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UserProfile from "./components/UserProfile";
 import Workout from "./components/Workout";
+import SignInNavHead from "./components/SignInNavHead";
 
 // Authenticated Route is entry point - user either to sign in or home page
 const App = () => {
-  console.log("App");
+  const { userAuthenticated } = useAuthenticatedView();
+
   return (
-    <AuthenticatedViewProvider>
-      <Router>
-        <div className="App">
-          <Routes>
-            <Route path= "/*" element ={ <AuthenticatedRoute /> } />
-            <Route path = "/profile" element = { <UserProfile /> } />
-            <Route path = "/workout" element = { <Workout /> } />
-          </Routes>
-        </div>
-      </Router>
-    </AuthenticatedViewProvider>
+    <Router>
+      <div className="App">
+        {userAuthenticated ? <NavHead /> : <SignInNavHead />}
+
+        <Routes>
+          <Route path="/*" element={<AuthenticatedRoute />} />
+          <Route path="/profile" element={<UserProfile />} />
+          <Route path="/workout" element={<Workout />} />
+        </Routes>
+      </div>
+    </Router>
   );
 };
 

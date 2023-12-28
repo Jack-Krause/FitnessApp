@@ -1,15 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import ReactDOM from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
-import './index.css';
+import "./index.css";
 
-import App from './App';
+import App from "./App";
+import { AuthenticatedViewProvider } from "./contexts/AuthenticatedViewProvider";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    {/* Add provider or context here */}
-    <App />
+    <AuthenticatedViewProvider>
+      <App />
+    </AuthenticatedViewProvider>
   </React.StrictMode>
 );
-
