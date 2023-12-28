@@ -131,16 +131,16 @@ const SignIn = () => {
       <main>
         <div className="container mt-5">
           <div className="jumbotron">
-            <h1 className="display-4 text-center text-primary">
+            <h1 className="display-4 text-center text-dark">
               Welcome to the Fitness Tracker!
             </h1>
-            <p className="lead text-center">
+            <p className="lead text-center text-secondary">
               Enter existing E-mail and Password
               <br />
               Or, register a new account
             </p>
           </div>
-          <div className="row justify-content-center">
+          <div className="row justify-content-center center">
             <div className="col-md-8">
               <h2 className="display-4 text-center text-primary">
                 Sign In or Register:
