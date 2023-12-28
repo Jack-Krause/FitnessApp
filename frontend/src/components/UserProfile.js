@@ -3,7 +3,7 @@ import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import Card from "react-bootstrap"
+import Card from "react-bootstrap";
 
 const UserProfile = () => {
   const { userEmail } = useAuthenticatedView();
@@ -13,7 +13,7 @@ const UserProfile = () => {
   return (
     <div>
       <main>
-        <Container fluid>
+        <Container fluid className=" p-3 bg-black">
           <Row className="justify-content-center mt-4">
             <Col>
               <svg
@@ -31,18 +31,32 @@ const UserProfile = () => {
                 />
               </svg>
             </Col>
-
             <Col>
-            <h1 className="mt-4 mb-4 text-light text-general">User Profile</h1>
+              <h1 className="mt-4 mb-4 text-light text-general">
+                User Profile
+              </h1>
             </Col>
           </Row>
-
+{/* end row 1 */}
           <Row>
             <Col>
-              <h2 className="text-40 text-danger text-center mt-4 mb-4"> {userEmail}'s profile </h2>
+              <h2 className="text-40 text-light text-center mt-4 mb-4">
+                {userEmail}'s profile
+              </h2>
             </Col>
           </Row>
+{/* end row 2 */}
         </Container>
+{/* end container 1 */}
+        <Container fluid className=" p-3">
+          <Row>
+            <Col>
+              <p className=" text-30 ">Workout stats:</p>
+            </Col>
+          </Row>
+{/* end row 3 */}
+        </Container>
+{/* end container 2 */}
       </main>
     </div>
   );
