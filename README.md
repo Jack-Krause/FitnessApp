@@ -8,3 +8,15 @@ SVGs used are free [Bootstrap Icons](https://icons.getbootstrap.com/).
 ## Current Progress
 Sign in / registration working
 Persistence of sign in status upon refresh working
+## Dependencies
+### Backend:
+*body-parser
+*cors
+*express
+*mongodb
+*mongoose
+*nodemon
+### Frontend:
+*axios
+*react-bootstrap, bootstrap-icons
+*react, react-dom, react-router-dom, react-scripts
