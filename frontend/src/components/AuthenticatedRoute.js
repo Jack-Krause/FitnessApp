@@ -25,8 +25,8 @@ const AuthenticatedRoute = () => {
             </>
           ) : (
             <>
-                <SignInNavHead />
-                <SignIn />
+              <SignInNavHead />
+              <SignIn />
             </>
           )
         }
