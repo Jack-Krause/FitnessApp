@@ -1,40 +1,13 @@
 import { React, useState } from "react";
 import { Carousel, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-    // useState fields for selecting a certain option on the carousel. useful if more options added
-    const [carouselIndex, setCarouselIndex] = useState(0);
-    
-    // track current item of the carousel
-    const handleCarouselSelect = (selectedCarousel) => {
-        setCarouselIndex(selectedCarousel);
-    };
-
-    // handle user selection from the carousel
-    const handleButtonClick = (event) => {
-        event.preventDefault();
-        if (carouselIndex === 0) {
-            openWorkoutView();
-        } else if (carouselIndex === 1) {
-            openProfileView();
-        }
-    };
-
-    // render view for manual workout tracking
-    const openWorkoutView = () => {
-        console.log("Open Workout");
-    }
-
-    // render view for user's profile
-    const openProfileView = () => {
-        console.log("Open Profile");
-    }
-
-// User Interface
+  // User Interface
   return (
     <div>
       <main>
-        <Carousel activeIndex={carouselIndex} onSelect={handleCarouselSelect} className="bg-dark" style={{ minHeight: "400px" }}>
+        <Carousel className="bg-dark" style={{ minHeight: "400px" }}>
           {/* General Workout Carousel Item */}
           <Carousel.Item interval={10000}>
             <div className="d-flex flex-column align-items-center justify-content-center h-300">
@@ -55,7 +28,10 @@ const Home = () => {
               </div>
               <div className="text-center">
                 <h2 className="text-white mt-2 mb-4">Quick Workout?</h2>
-                <Button variant="primary" onClick={handleButtonClick}>Enter</Button>
+                {/* Route users to general workout component on click */}
+                <Link to="/workout">
+                  <Button variant="primary">Enter</Button>
+                </Link>
               </div>
             </div>
           </Carousel.Item>
@@ -79,7 +55,10 @@ const Home = () => {
               </div>
               <div className="text-center">
                 <h2 className="text-white mt-2 mb-4">View Profile</h2>
-                <Button variant="primary" onClick={handleButtonClick}>Enter</Button>
+                {/* Route users to their profile on click */}
+                <Link to="/profile">
+                  <Button variant="primary">Enter</Button>
+                </Link>
               </div>
             </div>
           </Carousel.Item>

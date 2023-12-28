@@ -7,6 +7,8 @@ import "./index.css";
 import NavHead from "./components/NavHead";
 import { AuthenticatedViewProvider } from "./contexts/AuthenticatedViewProvider";
 import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import UserProfile from "./components/UserProfile";
+import Workout from "./components/Workout";
 
 // Authenticated Route is entry point - user either to sign in or home page
 const App = () => {
@@ -17,6 +19,8 @@ const App = () => {
         <div className="App">
           <Routes>
             <Route path= "/*" element ={ <AuthenticatedRoute /> } />
+            <Route path = "/profile" element = { <UserProfile /> } />
+            <Route path = "/workout" element = { <Workout /> } />
           </Routes>
         </div>
       </Router>
