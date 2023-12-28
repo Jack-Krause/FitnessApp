@@ -6,8 +6,8 @@ This project will follow important RESTful API principles. I'll be working on pr
 Most methods for this project were learned in SE/COMS 319 at Iowa State University.
 SVGs used are free [Bootstrap Icons](https://icons.getbootstrap.com/).
 ## Current Progress
-Sign in / registration working
-Persistence of sign in status upon refresh working
+* Sign in / registration working
+* Persistence of sign in status upon refresh working
 ## Dependencies
 ### Backend:
 * body-parser
