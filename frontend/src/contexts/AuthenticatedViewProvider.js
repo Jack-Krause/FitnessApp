@@ -10,13 +10,25 @@ export const AuthenticatedViewProvider = ({ children }) => {
 
     const setUserStatus = (status) => {
         setUserAuthenticated(status);
-        localStorage.setItem("userAuthenticated", status ? "true" : "false");
+        // On sign in, save the users status to prevent refresh clearing
+        if (status) {
+            localStorage.setItem("userAuthenticated", "true");
+            localStorage.setItem("userEmail", userEmail);
+        // on sign out
+        } else {
+            localStorage.removeItem("userAuthenticated");
+            localStorage.removeItem("userEmail");
+            setUserEmail("");
+        }
+
     };
 
     useEffect(() => {
+        
         const storedUserAuthStatus = localStorage.getItem("userAuthenticated");
         if (storedUserAuthStatus === "true") {
             setUserAuthenticated(true);
+            setUserEmail(localStorage.getItem("userEmail"));
         }
 
     }, []);

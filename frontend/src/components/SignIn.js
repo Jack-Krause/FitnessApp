@@ -66,8 +66,10 @@ const SignIn = () => {
         // TODO: Move to the rest of the app
         // Set user sign in info
         setTimeout(function () {
+
           setUserAuthenticated(true);
           setUserEmail(userData.email);
+          
         }, 3000);
         clearTimeout();
       })
@@ -94,8 +96,10 @@ const SignIn = () => {
         // TODO: Move to the rest of the app
         // Set user sign in info
         setTimeout(function () {
+
           setUserAuthenticated(true);
           setUserEmail(userData.email);
+          
         }, 3000);
         clearTimeout();
       })
