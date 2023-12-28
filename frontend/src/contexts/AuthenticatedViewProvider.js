@@ -8,6 +8,18 @@ export const AuthenticatedViewProvider = ({ children }) => {
     const [userEmail, setUserEmail] = useState("");
     const [userAuthenticated, setUserAuthenticated] = useState(false);
 
+    const setUserStatus = (status) => {
+        setUserAuthenticated(status);
+        localStorage.setItem("userAuthenticated", status ? "true" : "false");
+    };
+
+    useEffect(() => {
+        const storedUserAuthStatus = localStorage.getItem("userAuthenticated");
+        if (storedUserAuthStatus === "true") {
+            setUserAuthenticated(true);
+        }
+
+    }, []);
 
 
     return (
@@ -15,7 +27,7 @@ export const AuthenticatedViewProvider = ({ children }) => {
             userEmail,
             setUserEmail,
             userAuthenticated,
-            setUserAuthenticated
+            setUserAuthenticated: setUserStatus
         }}>
             { children }
         </AuthenticatedViewContext.Provider>
