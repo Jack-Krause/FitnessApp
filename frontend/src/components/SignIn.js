@@ -67,8 +67,9 @@ const SignIn = () => {
         // Set user sign in info
         setTimeout(function () {
 
-          setUserAuthenticated(true);
+          console.log(userData.email);
           setUserEmail(userData.email);
+          setUserAuthenticated(true);
           
         }, 3000);
         clearTimeout();
@@ -96,9 +97,9 @@ const SignIn = () => {
         // TODO: Move to the rest of the app
         // Set user sign in info
         setTimeout(function () {
-
-          setUserAuthenticated(true);
-          setUserEmail(userData.email);
+          console.log(userData.email);
+          // call context method for browser to "persistently" retain the user's email/status
+          setUserAuthenticated(true, userData.email);
           
         }, 3000);
         clearTimeout();

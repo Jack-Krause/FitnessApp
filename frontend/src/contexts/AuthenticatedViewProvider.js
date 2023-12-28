@@ -5,15 +5,27 @@ const AuthenticatedViewContext = createContext();
 // Context that allows us to wall the rest of the app from the user
 // until sign in is completed
 export const AuthenticatedViewProvider = ({ children }) => {
-    const [userEmail, setUserEmail] = useState("");
+    const [userEmail, setUserEmail] = useState(localStorage.getItem("userEmail") || "");
     const [userAuthenticated, setUserAuthenticated] = useState(false);
 
-    const setUserStatus = (status) => {
+    useEffect(() => {
+        const storedUserEmail = localStorage.getItem("userEmail");
+        const storedUserAuthStatus = localStorage.getItem("userAuthenticated");
+        
+        if (storedUserAuthStatus === "true" && storedUserEmail) {
+            setUserAuthenticated(true);
+            setUserEmail(storedUserEmail);
+        }
+    }, []);
+
+    const setUserStatus = (status, email = "") => {
         setUserAuthenticated(status);
+
         // On sign in, save the users status to prevent refresh clearing
         if (status) {
             localStorage.setItem("userAuthenticated", "true");
-            localStorage.setItem("userEmail", userEmail);
+            localStorage.setItem("userEmail", email);
+            setUserEmail(email);
         // on sign out
         } else {
             localStorage.removeItem("userAuthenticated");
@@ -22,16 +34,6 @@ export const AuthenticatedViewProvider = ({ children }) => {
         }
 
     };
-
-    useEffect(() => {
-        
-        const storedUserAuthStatus = localStorage.getItem("userAuthenticated");
-        if (storedUserAuthStatus === "true") {
-            setUserAuthenticated(true);
-            setUserEmail(localStorage.getItem("userEmail"));
-        }
-
-    }, []);
 
 
     return (
