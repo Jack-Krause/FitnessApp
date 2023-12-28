@@ -69,7 +69,7 @@ const SignIn = () => {
 
           console.log(userData.email);
           setUserAuthenticated(true);
-
+          setUserEmail(userData.email);
           localStorage.setItem("userEmail", userData.email);
           
         }, 3000);
@@ -101,7 +101,7 @@ const SignIn = () => {
           console.log(userData.email);
           // call context method for browser to "persistently" retain the user's email/status
           setUserAuthenticated(true);
-
+          setUserEmail(userData.email);
           localStorage.setItem("userEmail", userData.email);
 
           

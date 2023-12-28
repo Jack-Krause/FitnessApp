@@ -51,7 +51,7 @@ const UserProfile = () => {
         <Container fluid className=" p-3">
           <Row>
             <Col>
-              <p className=" text-30 ">Workout stats:</p>
+              <p className=" text-30 text-dark ">Workout stats:</p>
             </Col>
           </Row>
 {/* end row 3 */}
