@@ -18,14 +18,12 @@ export const AuthenticatedViewProvider = ({ children }) => {
         }
     }, []);
 
-    const setUserStatus = (status, email = "") => {
+    const setUserStatus = (status) => {
         setUserAuthenticated(status);
 
         // On sign in, save the users status to prevent refresh clearing
         if (status) {
             localStorage.setItem("userAuthenticated", "true");
-            localStorage.setItem("userEmail", email);
-            setUserEmail(email);
         // on sign out
         } else {
             localStorage.removeItem("userAuthenticated");
@@ -34,6 +32,7 @@ export const AuthenticatedViewProvider = ({ children }) => {
         }
 
     };
+    
 
 
     return (

@@ -68,8 +68,9 @@ const SignIn = () => {
         setTimeout(function () {
 
           console.log(userData.email);
-          setUserEmail(userData.email);
           setUserAuthenticated(true);
+
+          localStorage.setItem("userEmail", userData.email);
           
         }, 3000);
         clearTimeout();
@@ -99,7 +100,10 @@ const SignIn = () => {
         setTimeout(function () {
           console.log(userData.email);
           // call context method for browser to "persistently" retain the user's email/status
-          setUserAuthenticated(true, userData.email);
+          setUserAuthenticated(true);
+
+          localStorage.setItem("userEmail", userData.email);
+
           
         }, 3000);
         clearTimeout();
