@@ -2,12 +2,15 @@ import { React, useState } from "react";
 import { Carousel, Button } from "react-bootstrap";
 
 const Home = () => {
+    // useState fields for selecting a certain option on the carousel. useful if more options added
     const [carouselIndex, setCarouselIndex] = useState(0);
     
+    // track current item of the carousel
     const handleCarouselSelect = (selectedCarousel) => {
         setCarouselIndex(selectedCarousel);
     };
 
+    // handle user selection from the carousel
     const handleButtonClick = (event) => {
         event.preventDefault();
         if (carouselIndex === 0) {
@@ -17,10 +20,12 @@ const Home = () => {
         }
     };
 
+    // render view for manual workout tracking
     const openWorkoutView = () => {
         console.log("Open Workout");
     }
 
+    // render view for user's profile
     const openProfileView = () => {
         console.log("Open Profile");
     }
