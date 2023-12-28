@@ -26,6 +26,14 @@ code {
   font-size: 50px;
 }
 
+.text-40 {
+  font-size: 40px;
+}
+
+.text-30 {
+  font-size: 30px;
+}
+
 .gen-nav1 {
   color:coral !important;
 }
