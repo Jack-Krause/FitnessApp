@@ -11,24 +11,32 @@ import Button from "react-bootstrap/Button";
 const Workout = () => {
   const { userEmail } = useAuthenticatedView();
 
-  const [exercises, setExercises] = useState([]);
+  const [inputExercise, setInputExercise] = useState("");
+  const [inputMuscle, setInputMuscle] = useState("");
 
-  useEffect(() => {
-    const fetchExerciseData = async () => {
-      try {
-        const response = await getExercise("squat");
-        if (response.data.suggestions) {
-          setExercises(response.data.suggestions.map((item) => item.data));
-        } else {
-          console.error("Unexpected response format:", response);
-        }
-      } catch (err) {
-        console.error("[public api error]", err);
-      }
-    };
+  // state to dynamically search for the latest input by the user
+  const [searchCategory, setSearchCategory] = useState("No Input Provided");
+  // method for changing search subject
+  const handleInputChange = (event) => {
+    if (event.target.name === "inputExercise") {
+      setSearchCategory("Search by Exercise");
+      setInputExercise(event.target.value);
+    } else if (inputExercise === "" && inputMuscle === "") {
+      setSearchCategory("No Input Provided")
+    } else {
+      setSearchCategory("Search by Muscle");
+      setInputMuscle(event.target.value);
+    }
 
-    fetchExerciseData();
-  }, []);
+  };
+
+  // send to api service class
+  const handleSearch = (event) => {
+    event.preventDefault();
+    if (inputExercise) {
+      console.log();
+    }
+  };
 
   return (
     <div>
@@ -68,13 +76,17 @@ const Workout = () => {
                   <Form.Label>Search for an exercise</Form.Label>
                   <Form.Control
                     className="m-3"
+                    name="inputExercise"
                     type="text"
                     placeholder="Enter exercise name"
+                    value={inputExercise}
+                    onChange={handleInputChange}
                   />
                   <Form.Text className="text-info">
                     For example, "bench press".
                   </Form.Text>
                 </Form.Group>
+                {/* end of form control 1 */}
                 <Form.Group
                   className="mb-3 text-light"
                   controlId="formMuscleSearch"
@@ -82,16 +94,29 @@ const Workout = () => {
                   <Form.Label>Search by muscle group</Form.Label>
                   <Form.Control
                     className="m-3"
+                    name="inputMuscle"
                     type="text"
                     placeholder="Enter muscle group"
+                    value={inputMuscle}
+                    onChange={handleInputChange}
                   />
                   <Form.Text className="text-info">
                     Try searching "biceps".
                   </Form.Text>
                 </Form.Group>
                 <div className="text-center">
-                  <Button variant="primary" type="submit">
-                    Search
+                  <Button
+                    variant={
+                      searchCategory === "Search by Muscle"
+                      ? "warning"
+                      : searchCategory === "Search by Exercise"
+                      ? "danger"
+                      : "primary"
+                    }
+                    type="submit"
+                  >
+                    {" "}
+                    {searchCategory}
                   </Button>
                 </div>
               </Form>
@@ -101,15 +126,6 @@ const Workout = () => {
       </main>
     </div>
   );
-
-  // return (
-  //   <div>
-  //     {/* Display exercises or use the data as needed */}
-  //     {exercises.map((exercise) => (
-  //       <div key={exercise.id}>{exercise.name}</div>
-  //     ))}
-  //   </div>
-  // );
 };
 
 export default Workout;
