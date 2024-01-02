@@ -59,18 +59,41 @@ const Workout = () => {
           </Row>
           {/* end row 1 */}
           <Row className="justify-content-center">
-            <Col xs={12} md={6}>
-              <Form>
-                <Form.Group className="mb-3 text-light" controlId="formSearch">
+            <Col xs={12} md={8} lg={6}>
+              <Form className="text-center">
+                <Form.Group
+                  className="mb-3 text-light"
+                  controlId="formNameSearch"
+                >
                   <Form.Label>Search for an exercise</Form.Label>
                   <Form.Control
+                    className="m-3"
                     type="text"
-                    placeholder="enter exercise name"
-                  ></Form.Control>
+                    placeholder="Enter exercise name"
+                  />
                   <Form.Text className="text-info">
-                    Hit enter when ready.
+                    For example, "bench press".
                   </Form.Text>
                 </Form.Group>
+                <Form.Group
+                  className="mb-3 text-light"
+                  controlId="formMuscleSearch"
+                >
+                  <Form.Label>Search by muscle group</Form.Label>
+                  <Form.Control
+                    className="m-3"
+                    type="text"
+                    placeholder="Enter muscle group"
+                  />
+                  <Form.Text className="text-info">
+                    Try searching "biceps".
+                  </Form.Text>
+                </Form.Group>
+                <div className="text-center">
+                  <Button variant="primary" type="submit">
+                    Search
+                  </Button>
+                </div>
               </Form>
             </Col>
           </Row>
