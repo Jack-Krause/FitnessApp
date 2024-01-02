@@ -5,6 +5,8 @@ import { getExercise } from "../api/requestMethods";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import Button from "react-bootstrap/Button";
 
 const Workout = () => {
   const { userEmail } = useAuthenticatedView();
@@ -32,8 +34,8 @@ const Workout = () => {
     <div>
       <main>
         <Container fluid className="p-3 bg-black">
-          <Row className="justify-content-center mt-4">
-            <Col>
+          <Row className="align-items-center justify-content-center mt-4">
+            <Col xs={12} md={4} className="text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="150"
@@ -49,13 +51,29 @@ const Workout = () => {
                 />
               </svg>
             </Col>
-            <Col>
+            <Col xs={12} md={4} className="text-center">
               <h1 className="mt-4 mb-4 text-light text-general">
                 Browse Exercises
               </h1>
             </Col>
           </Row>
           {/* end row 1 */}
+          <Row className="justify-content-center">
+            <Col xs={12} md={6}>
+              <Form>
+                <Form.Group className="mb-3 text-light" controlId="formSearch">
+                  <Form.Label>Search for an exercise</Form.Label>
+                  <Form.Control
+                    type="text"
+                    placeholder="enter exercise name"
+                  ></Form.Control>
+                  <Form.Text className="text-info">
+                    Hit enter when ready.
+                  </Form.Text>
+                </Form.Group>
+              </Form>
+            </Col>
+          </Row>
         </Container>
       </main>
     </div>
