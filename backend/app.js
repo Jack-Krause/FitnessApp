@@ -6,6 +6,8 @@ var bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 //models/routes if needed
 const userRoutes = require("./routes/user.routes");
+const workoutRoutes = require("./routes/workout.routes");
+const exerciseRoutes = require("./routes/exercise.routes");
 
 const path = require("path");
 
@@ -14,6 +16,8 @@ app.use(bodyParser.json());
 
 //add controllers with app.use
 app.use("/user", userRoutes);
+app.use("/workout", workoutRoutes);
+app.use("/exercise", exerciseRoutes);
 
 const port = 4000;
 const host = "127.0.0.1";
