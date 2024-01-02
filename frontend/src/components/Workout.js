@@ -18,6 +18,7 @@ const Workout = () => {
   const handleInputChange = (event) => {
     const { name, value } = event.target;
 
+    // TODO: try to improve this wordy code
     if (name === "inputExercise") {
       setInputExercise(value);
       if (value) {
@@ -114,10 +115,10 @@ const Workout = () => {
                   <Button
                     variant={
                       searchCategory === "Search by Muscle"
-                        ? "warning"
+                        ? "secondary"
                         : searchCategory === "Search by Exercise"
-                        ? "danger"
-                        : "primary"
+                        ? "primary"
+                        : "danger"
                     }
                     type="submit"
                   >
