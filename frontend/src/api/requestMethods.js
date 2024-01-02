@@ -32,15 +32,16 @@ export const register = async (inputEmail, inputPassword, inputName) => {
   }
 };
 
-export const getExercise = async (exercise) => {
+export const getExercise = async (key, param) => {
+  const url = "https://wger.de/api/v2/";
+
   try {
-    const response = await axios.get("https://wger.de/api/v2/exercise/search", {
+    const response = await axios.get(url + key + "/search", {
       params: {
         language: "en",
-        term: exercise,
-      },
+        term: param
+      }
     });
-
     return response;
   } catch (err) {
     console.error("[public api error]", err);

@@ -43,6 +43,23 @@ const Workout = () => {
   // send to api service class
   const handleSearch = (event) => {
     event.preventDefault();
+
+    try {
+      if (searchCategory === "Search by Exercise" && inputExercise) {
+        getExercise("exercise", inputExercise.trim())
+          .then((response) => {
+            console.log("exer resp:", response.data);
+          });
+      } else if (searchCategory === "Search by Muscle" && inputMuscle) {
+        getExercise("muscle", inputMuscle)
+          .then((response) => {
+            console.log("musc resp:", response.data);
+          });
+      }
+    } catch (error) {
+      console.error(error);
+    }
+    
   };
 
   return (
