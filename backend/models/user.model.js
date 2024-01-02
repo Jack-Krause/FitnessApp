@@ -17,7 +17,15 @@ const userSchema = new mongoose.Schema(
         name: {
             type: String,
             required: false
-        }
+        },
+
+        // One-to-many relationship list of workouts for a single user
+        workouts:
+        [
+            {
+                type: mongoose.Schema.ObjectId, ref: "Workout"
+            }
+        ]
     }
 );
 
