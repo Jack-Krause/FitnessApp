@@ -13,29 +13,35 @@ const Workout = () => {
 
   const [inputExercise, setInputExercise] = useState("");
   const [inputMuscle, setInputMuscle] = useState("");
-
-  // state to dynamically search for the latest input by the user
   const [searchCategory, setSearchCategory] = useState("No Input Provided");
-  // method for changing search subject
-  const handleInputChange = (event) => {
-    if (event.target.name === "inputExercise") {
-      setSearchCategory("Search by Exercise");
-      setInputExercise(event.target.value);
-    } else if (inputExercise === "" && inputMuscle === "") {
-      setSearchCategory("No Input Provided")
-    } else {
-      setSearchCategory("Search by Muscle");
-      setInputMuscle(event.target.value);
-    }
 
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+
+    if (name === "inputExercise") {
+      setInputExercise(value);
+      if (value) {
+        setSearchCategory("Search by Exercise");
+      } else if (inputMuscle) {
+        setSearchCategory("Search by Muscle");
+      } else {
+        setSearchCategory("No Input Provided");
+      }
+    } else if (name === "inputMuscle") {
+      setInputMuscle(value);
+      if (value) {
+        setSearchCategory("Search by Muscle");
+      } else if (inputExercise) {
+        setSearchCategory("Search by Exercise");
+      } else {
+        setSearchCategory("No Input Provided");
+      }
+    }
   };
 
   // send to api service class
   const handleSearch = (event) => {
     event.preventDefault();
-    if (inputExercise) {
-      console.log();
-    }
   };
 
   return (
@@ -68,7 +74,7 @@ const Workout = () => {
           {/* end row 1 */}
           <Row className="justify-content-center">
             <Col xs={12} md={8} lg={6}>
-              <Form className="text-center">
+              <Form className="text-center" onSubmit={handleSearch}>
                 <Form.Group
                   className="mb-3 text-light"
                   controlId="formNameSearch"
@@ -108,14 +114,13 @@ const Workout = () => {
                   <Button
                     variant={
                       searchCategory === "Search by Muscle"
-                      ? "warning"
-                      : searchCategory === "Search by Exercise"
-                      ? "danger"
-                      : "primary"
+                        ? "warning"
+                        : searchCategory === "Search by Exercise"
+                        ? "danger"
+                        : "primary"
                     }
                     type="submit"
                   >
-                    {" "}
                     {searchCategory}
                   </Button>
                 </div>
