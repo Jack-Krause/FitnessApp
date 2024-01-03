@@ -127,14 +127,14 @@ const SignIn = () => {
   };
 
   return (
-    <div>
+    <div className = "bg-black">
       <main>
         <div className="container mt-5">
           <div className="jumbotron">
-            <h1 className="display-4 text-center text-dark">
+            <h1 className="display-4 text-center text-white">
               Welcome to the Fitness Tracker!
             </h1>
-            <p className="lead text-center text-secondary">
+            <p className="lead text-center text-white">
               Enter existing E-mail and Password
               <br />
               Or, register a new account
@@ -147,7 +147,7 @@ const SignIn = () => {
               </h2>
               <form onSubmit={handleUserFormSubmit}>
                 <div className="form-group">
-                  <label htmlFor="email" className="form-label">
+                  <label htmlFor="email" className="form-label text-primary">
                     E-mail
                   </label>
                   <input
@@ -159,7 +159,7 @@ const SignIn = () => {
                     placeholder="user@email.com"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="password" className="form-label">
+                  <label htmlFor="password" className="form-label text-primary">
                     Password
                   </label>
                   <input
@@ -171,7 +171,7 @@ const SignIn = () => {
                     placeholder="must be unique"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="name" className="form-label">
+                  <label htmlFor="name" className="form-label text-primary">
                     Name
                   </label>
                   <input

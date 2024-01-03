@@ -9,16 +9,19 @@ import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
 
-const Workout = () => {
+const WorkoutBrowser = () => {
   const { userEmail } = useAuthenticatedView();
 
+  // usestate for mapping the JSONArray of exercises pulled from public API
   const [queriedExercises, setQueriedExercises] = useState([]);
-
+  // entered input for dynamically changing the style and sending to the API
   const [inputExercise, setInputExercise] = useState("");
+  // changed to "No Input Provided if user has entered no input"
   const [searchCategory, setSearchCategory] = useState("No Input Provided");
 
+  // dynamically change the style dependent on input or lack therof
   const handleInputChange = (event) => {
-    var tempData = event.target.value; // Change 'data' to 'value'
+    var tempData = event.target.value;
     setInputExercise(tempData);
     if (tempData) {
       setSearchCategory("Search for Exercise");
@@ -43,7 +46,14 @@ const Workout = () => {
     }
   };
 
+  // send to backend to save a specific exercise to a user's library
   const handleLibraryClick = (event) => {
+    event.preventDefault();
+
+    const idx = event.target.name;
+    const exerciseToSend = queriedExercises[idx];
+    console.log("idx", idx);
+    console.log(exerciseToSend.value);+
 
   };
 
@@ -129,7 +139,7 @@ const Workout = () => {
               {queriedExercises.map((exercise, index) => (
                 <ListGroup.Item key={index}>
                   <p>{exercise.value}</p>
-                  <Button onClick={handleLibraryClick}>Add To Library</Button>
+                  <Button onClick={handleLibraryClick} name = {index}>Add To Library</Button>
                 </ListGroup.Item>
               ))}
             </ListGroup>
@@ -140,4 +150,4 @@ const Workout = () => {
   );
 };
 
-export default Workout;
+export default WorkoutBrowser;
