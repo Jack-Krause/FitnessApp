@@ -34,14 +34,7 @@ export const register = async (inputEmail, inputPassword, inputName) => {
 
 // provides searching and browsing from public API
 export const getExercise = async (key, param) => {
-  let url = "https://wger.de/api/v2/"
-  
-  if (key === "muscle") {
-    url = url + key;
-  } else if (key === "exercise") {
-    url = url + key + "/search";
-  }
-  
+  const url = "https://wger.de/api/v2/" + key + "/search";
 
   try {
     const response = await axios.get(url, {
@@ -53,6 +46,23 @@ export const getExercise = async (key, param) => {
     return response;
   } catch (err) {
     console.error("[public api error]", err);
+    throw err;
+  }
+};
+
+// send to backend an exercise to be saved to user's library
+export const postExercise = async (userEmail, exerciseName, exerciseCategory) => {
+  try {
+    const response = await axios.post(`http://127.0.0.1:4000/exercise/postExercise/${userEmail}`, {
+      params: {
+        name: exerciseName,
+        category: exerciseCategory
+      }
+    });
+
+    return response;
+  } catch (err) {
+    console.error("[api] error", err);
     throw err;
   }
 };

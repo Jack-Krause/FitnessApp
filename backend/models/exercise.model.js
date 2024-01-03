@@ -30,6 +30,7 @@ const exerciseSchema = new mongoose.Schema({
     min: 0,
   },
 
+  // muscle involved with the specific exercise - defined by the public API
   category: {
     type: String,
     required: true,

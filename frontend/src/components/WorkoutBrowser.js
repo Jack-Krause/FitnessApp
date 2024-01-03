@@ -52,10 +52,12 @@ const WorkoutBrowser = () => {
 
     const idx = event.target.name;
     const exerciseToSend = queriedExercises[idx];
-    const cat = exerciseToSend.data.category;
-    console.log("cat", cat);
-    console.log("idx", idx);
-    console.log(exerciseToSend.data.name);
+    // parse relevant data and call api helper class method
+    const exerciseName = exerciseToSend.data.name;
+    const exerciseCategory = exerciseToSend.data.category;
+
+    console.log("cat", exerciseCategory);
+    console.log(exerciseName);
     
   };
 
