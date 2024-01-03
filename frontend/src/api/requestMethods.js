@@ -33,10 +33,17 @@ export const register = async (inputEmail, inputPassword, inputName) => {
 };
 
 export const getExercise = async (key, param) => {
-  const url = "https://wger.de/api/v2/";
+  let url = "https://wger.de/api/v2/"
+  
+  if (key === "muscle") {
+    url = url + key;
+  } else if (key === "exercise") {
+    url = url + key + "/search";
+  }
+  
 
   try {
-    const response = await axios.get(url + key + "/search", {
+    const response = await axios.get(url, {
       params: {
         language: "en",
         term: param
