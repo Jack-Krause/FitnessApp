@@ -5,6 +5,7 @@ This project will follow important RESTful API principles. I'll be working on pr
 ## Current Progress
 * Sign in / registration working
 * Persistence of sign in status upon refresh working
+* Posting to a user's library of exercises pulled from the open API.
 ## Sources
 * Most methods for this project were learned in SE/COMS 319 at Iowa State University.
 * SVGs used are free [Bootstrap Icons](https://icons.getbootstrap.com/).
