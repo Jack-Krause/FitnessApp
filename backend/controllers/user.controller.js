@@ -13,6 +13,7 @@ const UserController = {
     }
   },
 
+  // retrieve a user form the db
   getUser: async (req, res) => {
     try {
       const { email, password } = req.body;
@@ -31,6 +32,7 @@ const UserController = {
     }
   },
 
+  // post a new user to the db
   createUser: async (req, res) => {
     try {
       const { email, password, name } = req.body;
@@ -50,6 +52,19 @@ const UserController = {
       res.status(500).send(error.message);
     }
   },
+
+  // retrieve a User instance by email
+  getUserByEmail: async (email) => {
+    try {
+      const user = await User.findOne( {email: email });
+      return user;
+    } catch (error) {
+      throw new Error("[getUserByEmail error]");
+    }
+  }
+
 };
+
+
 
 module.exports = UserController;

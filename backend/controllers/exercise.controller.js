@@ -1,22 +1,33 @@
 const Exercise = require("../models/exercise.model");
+const UserController = require("./user.controller");
 
 const ExerciseController = {
 
     createExercise: async (req, res) => {
         try {
-            const { name, sets, reps, weight } = req.body;
-            console.log(name, sets, reps, weight);
+            const { name, category } = req.body;
+            const email = req.params.userEmail;
+            console.log("name, category, email:", name, category, email);
+
+            const user = await UserController.getUserByEmail(email);
+
+            if (!user) {
+                return res.status(404).send("unable to retrieve user");
+            }
 
             const exerciseToPost = new Exercise({
                 name,
-                sets,
-                reps,
-                weight
+                category,
+                sets: 0,
+                reps: 0,
+                weight: 0
             });
 
             await exerciseToPost.save();
+            user.exerciseLibrary.push(exerciseToPost);
+            await user.save();
 
-            res.status(201).send("Exer creation success");
+            res.status(201).send("Exercise creation+save success");
         } catch (error) {
             res.status(500).send(error.message);
         }
