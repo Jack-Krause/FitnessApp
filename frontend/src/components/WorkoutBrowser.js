@@ -56,7 +56,7 @@ const WorkoutBrowser = () => {
     console.log("cat", cat);
     console.log("idx", idx);
     console.log(exerciseToSend.data.name);
-
+    
   };
 
   return (

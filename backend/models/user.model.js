@@ -18,6 +18,14 @@ const userSchema = new mongoose.Schema({
     required: false,
   },
 
+  // a persistant library of exercises a user is interested in for easy access
+  exerciseLibrary: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Exercise"
+    }
+  ],
+
   // One-to-many relationship list of workouts for a single user
   workouts: [
     {
