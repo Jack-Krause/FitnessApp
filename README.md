@@ -6,9 +6,9 @@ This project will follow important RESTful API principles. I'll be working on pr
 * Sign in / registration working
 * Persistence of sign in status upon refresh working
 ## Sources
-*Most methods for this project were learned in SE/COMS 319 at Iowa State University.
-*SVGs used are free [Bootstrap Icons](https://icons.getbootstrap.com/).
-*I also used an open public API. Here is the link for it: [wger Workout Manager](https://wger.de/en/software/api).
+* Most methods for this project were learned in SE/COMS 319 at Iowa State University.
+* SVGs used are free [Bootstrap Icons](https://icons.getbootstrap.com/).
+* I also used an open public API. Here is the link for it: [wger Workout Manager](https://wger.de/en/software/api).
 ## Dependencies
 ### Backend:
 * body-parser
