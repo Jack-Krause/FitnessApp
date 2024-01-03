@@ -5,7 +5,7 @@ const ExerciseController = {
 
     createExercise: async (req, res) => {
         try {
-            const { name, category } = req.body;
+            const { name, category } = req.body.params;
             const email = req.params.userEmail;
             console.log("name, category, email:", name, category, email);
 
@@ -31,7 +31,9 @@ const ExerciseController = {
         } catch (error) {
             res.status(500).send(error.message);
         }
-    }
+    },
+
+
 };
 
 module.exports = ExerciseController;

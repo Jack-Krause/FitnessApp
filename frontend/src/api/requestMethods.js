@@ -40,8 +40,8 @@ export const getExercise = async (key, param) => {
     const response = await axios.get(url, {
       params: {
         language: "en",
-        term: param
-      }
+        term: param,
+      },
     });
     return response;
   } catch (err) {
@@ -51,14 +51,21 @@ export const getExercise = async (key, param) => {
 };
 
 // send to backend an exercise to be saved to user's library
-export const postExercise = async (userEmail, exerciseName, exerciseCategory) => {
+export const postExercise = async (
+  userEmail,
+  exerciseName,
+  exerciseCategory
+) => {
   try {
-    const response = await axios.post(`http://127.0.0.1:4000/exercise/postExercise/${userEmail}`, {
-      params: {
-        name: exerciseName,
-        category: exerciseCategory
+    const response = await axios.post(
+      `http://127.0.0.1:4000/exercise/postExercise/${userEmail}`,
+      {
+        params: {
+          name: exerciseName,
+          category: exerciseCategory,
+        },
       }
-    });
+    );
 
     return response;
   } catch (err) {

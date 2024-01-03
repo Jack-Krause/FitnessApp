@@ -1,7 +1,6 @@
 const User = require("../models/user.model");
 
 const UserController = {
-
   // Add CRUDL methods for User
   getAllUsers: async (req, res) => {
     try {
@@ -41,13 +40,12 @@ const UserController = {
       const userToPost = new User({
         email,
         password,
-        name
+        name,
       });
 
       await userToPost.save();
       // 201 status code: created
       res.status(201).send("User creation success");
-      
     } catch (error) {
       res.status(500).send(error.message);
     }
@@ -56,15 +54,12 @@ const UserController = {
   // retrieve a User instance by email
   getUserByEmail: async (email) => {
     try {
-      const user = await User.findOne( {email: email });
+      const user = await User.findOne({ email: email });
       return user;
     } catch (error) {
       throw new Error("[getUserByEmail error]");
     }
-  }
-
+  },
 };
-
-
 
 module.exports = UserController;

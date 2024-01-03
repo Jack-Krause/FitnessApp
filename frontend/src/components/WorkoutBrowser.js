@@ -8,6 +8,7 @@ import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
 import ListGroup from "react-bootstrap/ListGroup";
+import { postExercise } from "../api/requestMethods";
 
 const WorkoutBrowser = () => {
   const { userEmail } = useAuthenticatedView();
@@ -58,7 +59,7 @@ const WorkoutBrowser = () => {
 
     console.log("cat", exerciseCategory);
     console.log(exerciseName);
-    
+    postExercise(userEmail, exerciseName, exerciseCategory);
   };
 
   return (
@@ -143,7 +144,9 @@ const WorkoutBrowser = () => {
               {queriedExercises.map((exercise, index) => (
                 <ListGroup.Item key={index}>
                   <p>{exercise.data.name}</p>
-                  <Button onClick={handleLibraryClick} name = {index}>Add To Library</Button>
+                  <Button onClick={handleLibraryClick} name={index}>
+                    Add To Library
+                  </Button>
                 </ListGroup.Item>
               ))}
             </ListGroup>
