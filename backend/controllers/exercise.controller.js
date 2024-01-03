@@ -5,14 +5,23 @@ const ExerciseController = {
 
     createExercise: async (req, res) => {
         try {
-            const { name, category } = req.body.params;
+            const { name, category } = req.body;
             const email = req.params.userEmail;
-            console.log("name, category, email:", name, category, email);
-
+            
             const user = await UserController.getUserByEmail(email);
 
             if (!user) {
                 return res.status(404).send("unable to retrieve user");
+            }
+
+            const isExerciseDuplicate = user.exerciseLibrary.some(
+                (exercise) => exercise.name === name && exercise.category === category
+            );
+
+            console.log(isExerciseDuplicate);
+
+            if (isExerciseDuplicate) {
+                return res.status(400).send("Exercise is a duplicate");
             }
 
             const exerciseToPost = new Exercise({

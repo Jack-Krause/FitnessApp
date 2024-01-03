@@ -60,10 +60,8 @@ export const postExercise = async (
     const response = await axios.post(
       `http://127.0.0.1:4000/exercise/postExercise/${userEmail}`,
       {
-        params: {
           name: exerciseName,
           category: exerciseCategory,
-        },
       }
     );
 
