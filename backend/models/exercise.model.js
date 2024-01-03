@@ -30,9 +30,15 @@ const exerciseSchema = new mongoose.Schema({
     min: 0,
   },
 
+  category: {
+    type: String,
+    required: true,
+  },
+
   workout: {
     type: mongoose.Schema.ObjectId,
     ref: "Workout",
+    required: false
   },
 });
 

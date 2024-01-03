@@ -52,8 +52,10 @@ const WorkoutBrowser = () => {
 
     const idx = event.target.name;
     const exerciseToSend = queriedExercises[idx];
+    const cat = exerciseToSend.data.category;
+    console.log("cat", cat);
     console.log("idx", idx);
-    console.log(exerciseToSend.value);+
+    console.log(exerciseToSend.data.name);
 
   };
 
@@ -138,7 +140,7 @@ const WorkoutBrowser = () => {
             <ListGroup>
               {queriedExercises.map((exercise, index) => (
                 <ListGroup.Item key={index}>
-                  <p>{exercise.value}</p>
+                  <p>{exercise.data.name}</p>
                   <Button onClick={handleLibraryClick} name = {index}>Add To Library</Button>
                 </ListGroup.Item>
               ))}
