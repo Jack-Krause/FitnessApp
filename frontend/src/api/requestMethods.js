@@ -32,6 +32,7 @@ export const register = async (inputEmail, inputPassword, inputName) => {
   }
 };
 
+// provides searching and browsing from public API
 export const getExercise = async (key, param) => {
   let url = "https://wger.de/api/v2/"
   
