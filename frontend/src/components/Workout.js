@@ -7,36 +7,23 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
+import ListGroup from "react-bootstrap/ListGroup";
 
 const Workout = () => {
   const { userEmail } = useAuthenticatedView();
 
+  const [queriedExercises, setQueriedExercises] = useState([]);
+
   const [inputExercise, setInputExercise] = useState("");
-  const [inputMuscle, setInputMuscle] = useState("");
   const [searchCategory, setSearchCategory] = useState("No Input Provided");
 
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-
-    // TODO: try to improve this wordy code
-    if (name === "inputExercise") {
-      setInputExercise(value);
-      if (value) {
-        setSearchCategory("Search by Exercise");
-      } else if (inputMuscle) {
-        setSearchCategory("Search by Muscle");
-      } else {
-        setSearchCategory("No Input Provided");
-      }
-    } else if (name === "inputMuscle") {
-      setInputMuscle(value);
-      if (value) {
-        setSearchCategory("Search by Muscle");
-      } else if (inputExercise) {
-        setSearchCategory("Search by Exercise");
-      } else {
-        setSearchCategory("No Input Provided");
-      }
+    var tempData = event.target.value; // Change 'data' to 'value'
+    setInputExercise(tempData);
+    if (tempData) {
+      setSearchCategory("Search for Exercise");
+    } else {
+      setSearchCategory("No Input Provided");
     }
   };
 
@@ -44,30 +31,28 @@ const Workout = () => {
   const handleSearch = (event) => {
     event.preventDefault();
 
-    try {
-      if (searchCategory === "Search by Exercise" && inputExercise) {
-        getExercise("exercise", inputExercise.trim())
-          .then((response) => {
-            console.log("exer resp:", response.data);
-          });
-      } else if (searchCategory === "Search by Muscle" && inputMuscle) {
-        getExercise("muscle", inputMuscle)
-          .then((response) => {
-            console.log("musc resp:", response.data);
-          });
-      }
-    } catch (error) {
-      console.error(error);
+    if (searchCategory === "Search for Exercise" && inputExercise) {
+      getExercise("exercise", inputExercise.trim())
+        .then((response) => {
+          setQueriedExercises(response.data.suggestions);
+          console.log("response:", response.data);
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
-    
+  };
+
+  const handleLibraryClick = (event) => {
+
   };
 
   return (
     <div>
       <main>
-        <Container fluid className="p-3 bg-black">
+        <Container fluid className="p-5 bg-black">
           <Row className="align-items-center justify-content-center mt-4">
-            <Col xs={12} md={4} className="text-center">
+            <Col xs={10} md={4} className="text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="150"
@@ -83,7 +68,7 @@ const Workout = () => {
                 />
               </svg>
             </Col>
-            <Col xs={12} md={4} className="text-center">
+            <Col xs={10} md={10} lg={10} className="text-center">
               <h1 className="mt-4 mb-4 text-light text-general">
                 Browse Exercises
               </h1>
@@ -91,7 +76,7 @@ const Workout = () => {
           </Row>
           {/* end row 1 */}
           <Row className="justify-content-center">
-            <Col xs={12} md={8} lg={6}>
+            <Col xs={10} md={8} lg={6}>
               <Form className="text-center" onSubmit={handleSearch}>
                 <Form.Group
                   className="mb-3 text-light"
@@ -110,30 +95,10 @@ const Workout = () => {
                     For example, "bench press".
                   </Form.Text>
                 </Form.Group>
-                {/* end of form control 1 */}
-                <Form.Group
-                  className="mb-3 text-light"
-                  controlId="formMuscleSearch"
-                >
-                  <Form.Label>Search by muscle group</Form.Label>
-                  <Form.Control
-                    className="m-3"
-                    name="inputMuscle"
-                    type="text"
-                    placeholder="Enter muscle group"
-                    value={inputMuscle}
-                    onChange={handleInputChange}
-                  />
-                  <Form.Text className="text-info">
-                    Try searching "biceps".
-                  </Form.Text>
-                </Form.Group>
                 <div className="text-center">
                   <Button
                     variant={
-                      searchCategory === "Search by Muscle"
-                        ? "secondary"
-                        : searchCategory === "Search by Exercise"
+                      searchCategory === "Search for Exercise"
                         ? "primary"
                         : "danger"
                     }
@@ -144,6 +109,30 @@ const Workout = () => {
                 </div>
               </Form>
             </Col>
+          </Row>
+          {/* end row 2 */}
+        </Container>
+        <Container fluid className="p-5 bg-light">
+          <Row className="align-items-center justify-content-center mt-4">
+            <Col xs={11} md={5} lg={5}>
+              <h2 className="mt-2 mb-4 text-dark text-40">Search Results:</h2>
+            </Col>
+            <Col xs={11} md={5} lg={5}>
+              <p className="mt-2 mb-4 text-dark text-20">
+                Hit the Add button to save an exercise to your library!
+              </p>
+            </Col>
+          </Row>
+          {/* end row 1 container 2 */}
+          <Row className="align-items-center justify-content-center mt-4">
+            <ListGroup>
+              {queriedExercises.map((exercise, index) => (
+                <ListGroup.Item key={index}>
+                  <p>{exercise.value}</p>
+                  <Button onClick={handleLibraryClick}>Add To Library</Button>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
           </Row>
         </Container>
       </main>
