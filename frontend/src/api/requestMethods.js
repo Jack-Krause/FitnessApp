@@ -68,6 +68,6 @@ export const postExercise = async (
     return response;
   } catch (err) {
     console.error("[api] error", err);
-    throw err;
+    return err;
   }
 };

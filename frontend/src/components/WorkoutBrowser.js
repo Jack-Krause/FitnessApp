@@ -48,7 +48,7 @@ const WorkoutBrowser = () => {
   };
 
   // send to backend to save a specific exercise to a user's library
-  const handleLibraryClick = (event) => {
+  const handleLibraryClick = async (event) => {
     event.preventDefault();
 
     const idx = event.target.name;
@@ -59,7 +59,23 @@ const WorkoutBrowser = () => {
 
     console.log("cat", exerciseCategory);
     console.log(exerciseName);
-    postExercise(userEmail, exerciseName, exerciseCategory);
+
+    const response = await postExercise(userEmail, exerciseName, exerciseCategory);
+
+    try {
+      if (response.status === 201) {
+        console.log("success posting exercise");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        console.log("error: exercise already in db");
+      } else {
+        console.error(error.message);
+      }
+    }
+
+
+
   };
 
   return (
