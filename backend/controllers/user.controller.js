@@ -54,7 +54,7 @@ const UserController = {
   // retrieve a User instance by email
   getUserByEmail: async (email) => {
     try {
-      const user = await User.findOne({ email: email });
+      const user = await User.findOne({ email: email }).populate('exerciseLibrary');
       return user;
     } catch (error) {
       throw new Error("[getUserByEmail error]");
