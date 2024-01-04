@@ -127,27 +127,27 @@ const SignIn = () => {
   };
 
   return (
-    <div className = "bg-black">
+    <div className = "bg-dark">
       <main>
-        <div className="container mt-5">
+        <div className="container">
           <div className="jumbotron">
-            <h1 className="display-4 text-center text-white">
+            <h1 className="display-4 text-center text-light pt-5 gen-bold">
               Welcome to the Fitness Tracker!
             </h1>
-            <p className="lead text-center text-white">
+            <p className="lead text-center text-secondary gen-bold">
               Enter existing E-mail and Password
               <br />
-              Or, register a new account
+              or register a new account
             </p>
           </div>
           <div className="row justify-content-center center">
             <div className="col-md-8">
-              <h2 className="display-4 text-center text-primary">
+              <h2 className="display-4 text-center text-light">
                 Sign In or Register:
               </h2>
               <form onSubmit={handleUserFormSubmit}>
                 <div className="form-group">
-                  <label htmlFor="email" className="form-label text-primary">
+                  <label htmlFor="email" className="form-label text-warning">
                     E-mail
                   </label>
                   <input
@@ -159,7 +159,7 @@ const SignIn = () => {
                     placeholder="user@email.com"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="password" className="form-label text-primary">
+                  <label htmlFor="password" className="form-label text-warning">
                     Password
                   </label>
                   <input
@@ -171,7 +171,7 @@ const SignIn = () => {
                     placeholder="must be unique"
                     className="form-control mb-3"
                   />
-                  <label htmlFor="name" className="form-label text-primary">
+                  <label htmlFor="name" className="form-label text-warning">
                     Name
                   </label>
                   <input

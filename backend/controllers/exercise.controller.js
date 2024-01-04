@@ -18,8 +18,6 @@ const ExerciseController = {
                 (exercise) => exercise.name === name && exercise.category === category
             );
 
-            console.log(isExerciseDuplicate);
-
             if (isExerciseDuplicate) {
                 return res.status(400).send("Exercise is a duplicate");
             }
