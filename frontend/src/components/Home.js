@@ -80,9 +80,9 @@ const Home = () => {
                 </svg>
               </div>
               <div className="text-center">
-                <h2 className="text-black mt-2 mb-4">Create a Workout</h2>
+                <h2 className="text-black mt-2 mb-4">Post a Workout</h2>
                 {/* Route users to their profile on click */}
-                <Link to="/profile">
+                <Link to="/createworkout">
                   <Button variant="secondary" className="mb-4 text-white">Enter</Button>
                 </Link>
               </div>

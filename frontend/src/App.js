@@ -13,6 +13,7 @@ import AuthenticatedRoute from "./components/AuthenticatedRoute";
 import UserProfile from "./components/UserProfile";
 import WorkoutBrowser from "./components/WorkoutBrowser";
 import SignInNavHead from "./components/SignInNavHead";
+import CreateWorkoutView from "./components/CreateWorkoutView";
 
 // Authenticated Route is entry point - user either to sign in or home page
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/*" element={<AuthenticatedRoute />} />
           <Route path="/profile" element={<UserProfile />} />
           <Route path="/workout" element={<WorkoutBrowser />} />
+          <Route path="/createworkout" element = {<CreateWorkoutView />} />
         </Routes>
       </div>
     </Router>

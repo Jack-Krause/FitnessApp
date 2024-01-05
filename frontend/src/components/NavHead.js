@@ -32,14 +32,14 @@ function NavHead() {
               Home
             </Nav.Link>
             <Nav.Link as={Link} to="/workout">
-              Workout
+              Browse Exercises
             </Nav.Link>
             <NavDropdown title="See More:" id="basic-nav-dropdown">
               <NavDropdown.Item as={Link} to="/profile">
                 View Profile
               </NavDropdown.Item>
-              <NavDropdown.Item href="#action/3.2">
-                Another action
+              <NavDropdown.Item as={Link} to="/createworkout">
+                Post Workout
               </NavDropdown.Item>
               <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
               <NavDropdown.Divider />
