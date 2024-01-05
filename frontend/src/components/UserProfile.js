@@ -13,9 +13,9 @@ const UserProfile = () => {
   return (
     <div>
       <main>
-        <Container fluid className=" p-3 bg-black">
-          <Row className="justify-content-center mt-4">
-            <Col>
+        <Container fluid className="p-5 bg-black">
+          <Row className="align-items-center justify-content-center mt-4">
+            <Col xs={10} md={10} lg={10} className="text-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 height="150"
@@ -31,7 +31,7 @@ const UserProfile = () => {
                 />
               </svg>
             </Col>
-            <Col>
+            <Col xs={10} md={10} lg={10} className="text-center">
               <h1 className="mt-4 mb-4 text-light text-general">
                 User Profile
               </h1>
@@ -39,18 +39,16 @@ const UserProfile = () => {
           </Row>
 {/* end row 1 */}
           <Row>
-            <Col>
-              <h2 className="text-40 text-light text-center mt-4 mb-4">
-                {userEmail}'s profile
-              </h2>
+            <Col xs={12} md={12} lg={12} className="text-center">
+              <h2 className="text-40 text-light mt-4 mb-4">{userEmail}'s profile</h2>
             </Col>
           </Row>
 {/* end row 2 */}
         </Container>
 {/* end container 1 */}
-        <Container fluid className=" p-3">
+        <Container fluid className="p-3 bg-warning">
           <Row>
-            <Col>
+            <Col xs={12} md={12} lg={12} className="text-center">
               <p className=" text-30 text-dark ">Workout stats:</p>
             </Col>
           </Row>
