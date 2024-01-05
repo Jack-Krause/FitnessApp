@@ -8,8 +8,6 @@ import Card from "react-bootstrap";
 const UserProfile = () => {
   const { userEmail } = useAuthenticatedView();
 
-  console.log("userEmail", userEmail);
-
   return (
     <div>
       <main>
