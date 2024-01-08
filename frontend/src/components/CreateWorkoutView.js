@@ -1,11 +1,23 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
 import Container from "react-bootstrap/Container";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
+import Button from "react-bootstrap/Button";
+import Nav from "react-bootstrap/Nav";
 
 const CreateWorkoutView = () => {
   const { userEmail } = useAuthenticatedView();
+
+  // useState for library of exercises specific to this user
+  const [queriedExercises, setQueriedExercises] = useState([]);
+
+  // handler for button to search and retrieve user library of exercises
+  const getUserExercises = (event) => {
+    event.preventDefault();
+
+    // call api helper request method for exercise libary
+  };
 
   return (
     <div>
@@ -29,6 +41,30 @@ const CreateWorkoutView = () => {
                 Build Your Workout
               </h1>
             </Col>
+          </Row>
+        </Container>
+        <Nav fill variant="tabs" defaultActiveKey="/createworkout">
+          <Nav.Item>
+            <Button onClick className="p-3 text-20" variant="dark">
+              Search/Refresh Library
+            </Button>
+          </Nav.Item>
+          <Nav.Item>
+            <Button onClick className="p-3 text-20" variant="warning">
+              Search/Refresh Library
+            </Button>
+          </Nav.Item>
+        </Nav>
+        <Container className="align-items-center justify-content-center mt-4 bg-warning">
+          <Row className="align-items-center justify-content-center mt-4">
+            <p className="text-30 mt-4 mb-4">Exercises in your library:</p>
+          </Row>
+        </Container>
+        <Container className="align-items-center justify-content-center mt-4">
+          <Row className="align-items-center justify-content-center">
+            <Button onClick className="p-3 text-20" variant="dark">
+              Search/Refresh Library
+            </Button>
           </Row>
         </Container>
       </main>

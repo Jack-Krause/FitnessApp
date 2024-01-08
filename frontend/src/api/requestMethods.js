@@ -60,8 +60,8 @@ export const postExercise = async (
     const response = await axios.post(
       `http://127.0.0.1:4000/exercise/postExercise/${userEmail}`,
       {
-          name: exerciseName,
-          category: exerciseCategory,
+        name: exerciseName,
+        category: exerciseCategory,
       }
     );
 
