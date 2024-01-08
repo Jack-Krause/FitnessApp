@@ -5,6 +5,8 @@ import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Button from "react-bootstrap/Button";
 import Nav from "react-bootstrap/Nav";
+import LibraryListView from "./LibraryListView";
+import WorkoutListView from "./WorkoutListView";
 
 const CreateWorkoutView = () => {
   const { userEmail } = useAuthenticatedView();
@@ -12,16 +14,22 @@ const CreateWorkoutView = () => {
   // useState for library of exercises specific to this user
   const [queriedExercises, setQueriedExercises] = useState([]);
 
+  const [selectedTab, setSelectedTab] = useState("tab1");
+
   // handler for button to search and retrieve user library of exercises
   const getUserExercises = (event) => {
     event.preventDefault();
 
+    const tabName = event.target.name;
+
+    setSelectedTab(tabName);
     // call api helper request method for exercise libary
   };
 
   return (
     <div>
       <main>
+        <div className="nav-tabs">
         <Container className="align-items-center justify-content-center mt-4">
           <Row className="align-items-center justify-content-center mt-4">
             <Col xs={10} md={10} lg={10} className="text-center">
@@ -45,28 +53,22 @@ const CreateWorkoutView = () => {
         </Container>
         <Nav fill variant="tabs" defaultActiveKey="/createworkout">
           <Nav.Item>
-            <Button onClick className="p-3 text-20" variant="dark">
-              Search/Refresh Library
+            <Button name="tab1" onClick={getUserExercises} className="p-3 text-20" variant={selectedTab === "tab1" ? "warning" : "secondary"}>
+              Library
             </Button>
           </Nav.Item>
           <Nav.Item>
-            <Button onClick className="p-3 text-20" variant="warning">
-              Search/Refresh Library
+            <Button name="tab2" onClick={getUserExercises} className="p-3 text-20" variant={selectedTab === "tab2" ? "warning" : "secondary"}>
+              Workout
             </Button>
           </Nav.Item>
         </Nav>
-        <Container className="align-items-center justify-content-center mt-4 bg-warning">
-          <Row className="align-items-center justify-content-center mt-4">
-            <p className="text-30 mt-4 mb-4">Exercises in your library:</p>
-          </Row>
-        </Container>
-        <Container className="align-items-center justify-content-center mt-4">
-          <Row className="align-items-center justify-content-center">
-            <Button onClick className="p-3 text-20" variant="dark">
-              Search/Refresh Library
-            </Button>
-          </Row>
-        </Container>
+        <Container className="align-items-center justify-content-center mt-4"></Container>
+        </div>
+        <div>
+          { selectedTab === "tab1" && <LibraryListView /> }
+          { selectedTab === "tab2" && <WorkoutListView />}
+        </div>
       </main>
     </div>
   );
