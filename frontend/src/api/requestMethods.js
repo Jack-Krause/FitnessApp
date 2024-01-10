@@ -71,3 +71,12 @@ export const postExercise = async (
     return err;
   }
 };
+
+export const getPlayList = async() => {
+  try {
+    //call axios url
+  } catch (err) {
+    console.error("[api error]", err);
+    return err;
+  }
+};
