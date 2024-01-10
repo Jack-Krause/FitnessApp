@@ -2,46 +2,47 @@ const mongoose = require("mongoose");
 
 // Schema defining a basic user model for the MongoDB collection 'fitnessdata.users'
 const userSchema = new mongoose.Schema({
-  email: {
-    type: String,
-    required: true,
-    unique: true,
-  },
 
-  password: {
-    type: String,
-    required: true,
-  },
+	email: {
+		type: String,
+		required: true,
+		unique: true,
+	},
 
-  name: {
-    type: String,
-    required: false,
-  },
+	password: {
+		type: String,
+		required: true,
+	},
 
-  // a persistant library of exercises a user is interested in for easy access
-  exerciseLibrary: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Exercise"
-    }
-  ],
+	name: {
+		type: String,
+		required: false,
+	},
 
-  // One-to-many relationship list of workouts for a single user
-  // completed workouts with data from the user
-  workouts: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Workout",
-    },
-  ],
+	// a persistant library of exercises a user is interested in for easy access
+	exerciseLibrary: [
+		{
+			type: mongoose.Schema.ObjectId,
+			ref: "Exercise",
+		},
+	],
 
-  // Similar to music playlists, users can modify and use playlists when they actually complete workouts
-  playlist: [
-    {
-      type: mongoose.Schema.ObjectId,
-      ref: "Workout"
-    }
-  ],
+	// One-to-many relationship list of workouts for a single user
+	// completed workouts with data from the user
+	workouts: [
+		{
+			type: mongoose.Schema.ObjectId,
+			ref: "Workout",
+		},
+	],
+
+	// Similar to music playlists, users can modify and use playlists when they actually complete workouts
+	playlist: [
+		{
+			type: mongoose.Schema.ObjectId,
+			ref: "Workout",
+		},
+	],
 });
 
 const User = mongoose.model("User", userSchema, "users");
