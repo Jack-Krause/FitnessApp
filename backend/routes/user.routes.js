@@ -8,4 +8,7 @@ router.post("/signin", UserController.getUser);
 // Registration post request
 router.post("/register", UserController.createUser);
 
+// Playlist get request
+router.get("/getplaylist", UserController.getPlayList);
+
 module.exports = router;
