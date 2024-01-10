@@ -19,9 +19,9 @@ export const WorkoutPlayListProvider = ( { children } ) => {
         try {
             const data = await getPlayList(userEmail);
             setQueriedPlayList(data);
-        } catch (err) {
+        } catch (error) {
             console.error("[fetchPlayList]", error);
-            throw err;
+            throw error;
         }
     };
     

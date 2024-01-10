@@ -5,12 +5,15 @@ import "./index.css";
 
 import App from "./App";
 import { AuthenticatedViewProvider } from "./contexts/AuthenticatedViewProvider";
+import { WorkoutPlayListProvider } from "./contexts/WorkoutPlaylistProvider";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <AuthenticatedViewProvider>
-      <App />
-    </AuthenticatedViewProvider>
-  </React.StrictMode>
+	<React.StrictMode>
+		<AuthenticatedViewProvider>
+			<WorkoutPlayListProvider>
+				<App />
+			</WorkoutPlayListProvider>
+		</AuthenticatedViewProvider>
+	</React.StrictMode>
 );
