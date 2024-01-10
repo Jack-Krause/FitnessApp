@@ -20,6 +20,12 @@ const workoutSchema = new mongoose.Schema({
       ref: "Exercise",
     },
   ],
+
+  // Template workouts are what makeup a user's 'playlist'
+  isTemplate: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 const Workout = mongoose.model("Workout", workoutSchema, "workouts");

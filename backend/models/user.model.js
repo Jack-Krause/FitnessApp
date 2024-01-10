@@ -27,11 +27,20 @@ const userSchema = new mongoose.Schema({
   ],
 
   // One-to-many relationship list of workouts for a single user
+  // completed workouts with data from the user
   workouts: [
     {
       type: mongoose.Schema.ObjectId,
       ref: "Workout",
     },
+  ],
+
+  // Similar to music playlists, users can modify and use playlists when they actually complete workouts
+  playlist: [
+    {
+      type: mongoose.Schema.ObjectId,
+      ref: "Workout"
+    }
   ],
 });
 
