@@ -25,16 +25,15 @@ const WorkoutListView = () => {
   const handleWorkoutOptions = async (event) => {
     event.preventDefault();
 
-	try {
-		const response = await getPlayList(userEmail);
+    try {
+      const response = await getPlayList(userEmail);
 
-		if (response.status === 201) {
-			console.log(response);
-		}
-	} catch (error) {
-		console.error(error.message);
-	}
-
+      if (response.status === 201) {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
