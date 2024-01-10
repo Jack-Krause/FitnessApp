@@ -1,4 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
+import { getPlayList } from "../api/requestMethods";
 
 const WorkoutPlayListContext = createContext();
 
@@ -15,8 +16,8 @@ export const WorkoutPlayListProvider = ( { children } ) => {
     
     const fetchPlayList = async () => {
         try {
-            // const data = await getPlayList();
-            // setQueriedPlayList(data);
+            const data = await getPlayList();
+            setQueriedPlayList(data);
         } catch (err) {
             console.error("[fetchPlayList]", error);
             throw err;
@@ -28,8 +29,18 @@ export const WorkoutPlayListProvider = ( { children } ) => {
     }, []);
 
     
-
-
-
+    return (
+        <WorkoutPlayListContext.Provider
+        value = {{
+            queriedPlaylist,
+            setQueriedPlayList,
+            fetchPlayList
+        }}>
+            {children}
+        </WorkoutPlayListContext.Provider>
+    );
 };
 
+export const useWorkoutPlayList = () => {
+    return useContext(WorkoutPlayListContext);
+};
