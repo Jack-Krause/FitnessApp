@@ -45,13 +45,13 @@ const CreateWorkoutView = () => {
             </Col>
             <Col xs={10} md={10} lg={10} className="text-center">
               <h1 className="mt-4 mb-4 text-light text-general">
-                Build Your Workout
+                Build A Workout Template
               </h1>
             </Col>
           </Row>
         </Container>
-        <Nav fill variant="pills" defaultActiveKey="/createworkout">
-          <Nav.Item>
+        <Nav fill variant="pills" defaultActiveKey="/createworkout" className="justify-content-center">
+          <Nav.Item className="mx-2">
             <Button
               name="tab1"
               onClick={getUserExercises}
@@ -61,7 +61,7 @@ const CreateWorkoutView = () => {
               Library
             </Button>
           </Nav.Item>
-          <Nav.Item>
+          <Nav.Item className="mx-2">
             <Button
               name="tab2"
               onClick={getUserExercises}
