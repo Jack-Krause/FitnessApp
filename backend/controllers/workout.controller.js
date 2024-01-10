@@ -6,8 +6,10 @@ const WorkoutController = {
 	addNewWorkoutToPlayList: async (req, res) => {
 		try {
 
-			const { name } = req.body;
-			const email = req.params.userEmail;
+			const { name, email } = req.body;
+			// const email = req.body.email;
+			console.log(name);
+			console.log(email);
 
 			const user = await UserController.getUserByEmail(email);
 

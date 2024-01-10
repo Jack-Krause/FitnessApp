@@ -88,3 +88,21 @@ export const getPlayList = async (userEmail) => {
 		return err;
 	}
 };
+
+export const addToPlayList = async (userEmail, workoutName) => {
+	try {
+		const response = axios.post(
+			"http://127.0.0.1:4000/workout/addtoplaylist",
+			{
+				email: userEmail,
+				name: workoutName
+			}
+		);
+
+		return response;
+	} catch (err) {
+		console.error("[api error]", err);
+		return err;
+	}
+
+};

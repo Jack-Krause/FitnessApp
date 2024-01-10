@@ -5,7 +5,7 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
-import { getPlayList } from "../api/requestMethods";
+import { getPlayList, addToPlayList } from "../api/requestMethods";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
 
 const WorkoutListView = () => {
@@ -34,6 +34,20 @@ const WorkoutListView = () => {
     } catch (error) {
       console.error(error.message);
     }
+  };
+
+  const handleNewWorkout = async (event) => {
+	event.preventDefault();
+
+	try {
+		const response = await addToPlayList(userEmail, userInput);
+		
+		if (response.status === 201) {
+			console.log(response);
+		}
+	} catch (error) {
+		console.error(error.message);
+	}
   };
 
   return (
@@ -73,7 +87,7 @@ const WorkoutListView = () => {
               <Nav.Item className="mx-2">
                 <Button
                   name="tab1"
-                  onClick={handleWorkoutOptions}
+                  onClick={handleNewWorkout}
                   className="p-3 text-20"
                   variant={selectedTab === "tab1" ? "warning" : "secondary"}
                 >
