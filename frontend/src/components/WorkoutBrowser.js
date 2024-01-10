@@ -60,9 +60,13 @@ const WorkoutBrowser = () => {
     console.log("cat", exerciseCategory);
     console.log(exerciseName);
 
-    const response = await postExercise(userEmail, exerciseName, exerciseCategory);
-
     try {
+      const response = await postExercise(
+        userEmail,
+        exerciseName,
+        exerciseCategory
+      );
+
       if (response.status === 201) {
         console.log("success posting exercise");
       }
@@ -73,9 +77,6 @@ const WorkoutBrowser = () => {
         console.error(error.message);
       }
     }
-
-
-
   };
 
   return (

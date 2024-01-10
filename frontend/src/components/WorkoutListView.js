@@ -5,26 +5,40 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
+import { getPlayList } from "../api/requestMethods";
+import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
 
 const WorkoutListView = () => {
-  const [inputWorkoutName, setInputWorkoutName] = useState("");
-
+  // user email used in sign in/reg
+  const { userEmail } = useAuthenticatedView();
+  // name of workout to add to playlist
+  const [userInput, setUserInput] = useState("");
+  // name of tab for visual effects
   const [selectedTab, setSelectedTab] = useState("tab1");
 
   const handleInputChange = (event) => {
     var tempData = event.target.value;
-    setInputWorkoutName(tempData);
-    
-  }
+    setUserInput(tempData);
+  };
 
-  const handleWorkoutOptions = (event) => {
+  // TODO: add searching functionality
+  const handleWorkoutOptions = async (event) => {
     event.preventDefault();
 
-    const tabName = event.target.name;
+    const workoutNameToPost = userInput;
+    console.log(workoutNameToPost);
 
-    setSelectedTab(tabName);
-  }
+	try {
+		const response = await getPlayList(userEmail);
 
+		if (response.status === 201) {
+			console.log(response);
+		}
+	} catch (error) {
+		console.error(error.message);
+	}
+
+  };
 
   return (
     <div>
@@ -44,39 +58,46 @@ const WorkoutListView = () => {
               <Col xs={8} sm={6} md={6}>
                 <Form.Control
                   className="m-3"
-                  name="inputWorkoutName"
+                  name="userInput"
                   type="text"
                   placeholder="name"
-                  value={inputWorkoutName}
+                  value={userInput}
                   onChange={handleInputChange}
                 />
               </Col>
             </Row>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formWorkoutSearch">
+            <Nav
+              fill
+              variant="pills"
+              defaultActiveKey="/makeworkout"
+              className="justify-content-center"
+            >
+              <Nav.Item className="mx-2">
+                <Button
+                  name="tab1"
+                  onClick={handleWorkoutOptions}
+                  className="p-3 text-20"
+                  variant={selectedTab === "tab1" ? "warning" : "secondary"}
+                >
+                  Create New
+                </Button>
+              </Nav.Item>
+              <Nav.Item className="mx-2">
+                <Button
+                  name="tab2"
+                  onClick={handleWorkoutOptions}
+                  className="p-3 text-20"
+                  variant={selectedTab === "tab2" ? "warning" : "secondary"}
+                >
+                  Edit Existing
+                </Button>
+              </Nav.Item>
+            </Nav>
+          </Form.Group>
         </Form>
       </Row>
-      <Nav fill variant="pills" defaultActiveKey="/makeworkout" className="justify-content-center">
-        <Nav.Item className="mx-2">
-          <Button
-            name="tab1"
-            onClick={handleWorkoutOptions}
-            className="p-3 text-20"
-            variant={selectedTab === "tab1" ? "warning" : "secondary"}
-          >
-            Create New
-          </Button>
-        </Nav.Item>
-        <Nav.Item className="mx-2">
-          <Button
-            name="tab2"
-            onClick={handleWorkoutOptions}
-            className="p-3 text-20"
-            variant={selectedTab === "tab2" ? "warning" : "secondary"}
-          >
-            Edit Existing
-          </Button>
-        </Nav.Item>
-      </Nav>
     </div>
   );
 };
