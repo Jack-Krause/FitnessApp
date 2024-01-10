@@ -8,6 +8,7 @@ const WorkoutPlayListContext = createContext();
 export const WorkoutPlayListProvider = ( { children } ) => {
     // actual playlist retrieved from backend (basically a list of workout templates)
     const [queriedPlaylist, setQueriedPlayList] = useState([]);
+    const userEmail = localStorage.getItem("userEmail");
 
     // TODO: (functional requirements)
     // call retrieve user playlist (GET) (use api helper)
@@ -16,7 +17,7 @@ export const WorkoutPlayListProvider = ( { children } ) => {
     
     const fetchPlayList = async () => {
         try {
-            const data = await getPlayList();
+            const data = await getPlayList(userEmail);
             setQueriedPlayList(data);
         } catch (err) {
             console.error("[fetchPlayList]", error);

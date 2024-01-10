@@ -66,7 +66,7 @@ const UserController = {
 	// retrieve the user's workout template playlist
 	getPlayList: async (req, res) => {
 		try {
-			const email = req.params.userEmail;
+			const email = req.body;
 
 			const user = await this.getUserByEmail(email);
 
