@@ -66,16 +66,18 @@ const UserController = {
 	// retrieve the user's workout template playlist
 	getPlayList: async (req, res) => {
 		try {
-			const email = req.body;
+			const email = req.body.email;
 
-			const user = await this.getUserByEmail(email);
+			const user = await UserController.getUserByEmail(email);
 
 			if (!user) {
+				console.error("error getting user")
 				return res.status(404).send("unable to retrieve user");
 			}
 
 			res.status(201).send(user.playlist);
 		} catch (error) {
+			console.error(error);
 			res.status(500).send(error.message);
 		}
 	},

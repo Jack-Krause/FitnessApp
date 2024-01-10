@@ -9,6 +9,6 @@ router.post("/signin", UserController.getUser);
 router.post("/register", UserController.createUser);
 
 // Playlist get request
-router.get("/getplaylist", UserController.getPlayList);
+router.post("/getplaylist", UserController.getPlayList);
 
 module.exports = router;

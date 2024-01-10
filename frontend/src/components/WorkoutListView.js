@@ -25,9 +25,6 @@ const WorkoutListView = () => {
   const handleWorkoutOptions = async (event) => {
     event.preventDefault();
 
-    const workoutNameToPost = userInput;
-    console.log(workoutNameToPost);
-
 	try {
 		const response = await getPlayList(userEmail);
 
