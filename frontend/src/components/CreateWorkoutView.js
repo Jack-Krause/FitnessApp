@@ -29,7 +29,6 @@ const CreateWorkoutView = () => {
   return (
     <div>
       <main>
-        <div className="nav-tabs">
         <Container className="align-items-center justify-content-center mt-4">
           <Row className="align-items-center justify-content-center mt-4">
             <Col xs={10} md={10} lg={10} className="text-center">
@@ -51,24 +50,30 @@ const CreateWorkoutView = () => {
             </Col>
           </Row>
         </Container>
-        <Nav fill variant="tabs" defaultActiveKey="/createworkout">
+        <Nav fill variant="pills" defaultActiveKey="/createworkout">
           <Nav.Item>
-            <Button name="tab1" onClick={getUserExercises} className="p-3 text-20" variant={selectedTab === "tab1" ? "warning" : "secondary"}>
+            <Button
+              name="tab1"
+              onClick={getUserExercises}
+              className="p-3 text-20"
+              variant={selectedTab === "tab1" ? "warning" : "secondary"}
+            >
               Library
             </Button>
           </Nav.Item>
           <Nav.Item>
-            <Button name="tab2" onClick={getUserExercises} className="p-3 text-20" variant={selectedTab === "tab2" ? "warning" : "secondary"}>
+            <Button
+              name="tab2"
+              onClick={getUserExercises}
+              className="p-3 text-20"
+              variant={selectedTab === "tab2" ? "warning" : "secondary"}
+            >
               Workout
             </Button>
           </Nav.Item>
         </Nav>
-        <Container className="align-items-center justify-content-center mt-4"></Container>
-        </div>
-        <div>
-          { selectedTab === "tab1" && <LibraryListView /> }
-          { selectedTab === "tab2" && <WorkoutListView />}
-        </div>
+        {selectedTab === "tab1" && <LibraryListView />}
+        {selectedTab === "tab2" && <WorkoutListView />}
       </main>
     </div>
   );
