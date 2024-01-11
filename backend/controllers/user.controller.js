@@ -54,9 +54,13 @@ const UserController = {
 	// retrieve a User instance by email
 	getUserByEmail: async (email) => {
 		try {
+			// call .populate() as needed
 			const user = await User.findOne({ email: email }).populate(
 				"exerciseLibrary"
+			).populate(
+				"playlist"
 			);
+
 			return user;
 		} catch (error) {
 			throw new Error("[getUserByEmail error]");
@@ -69,6 +73,7 @@ const UserController = {
 			const email = req.body.email;
 
 			const user = await UserController.getUserByEmail(email);
+
 
 			if (!user) {
 				console.error("error getting user")

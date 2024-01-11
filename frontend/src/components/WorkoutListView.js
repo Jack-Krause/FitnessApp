@@ -12,9 +12,10 @@ import { useWorkoutPlaylist } from "../contexts/WorkoutPlaylistProvider";
 const WorkoutListView = () => {
   // user email used in sign in/reg
   const { userEmail } = useAuthenticatedView();
-
+  // provider for using seeing, modifying, using playlists - add to this as needed
   const {
-    fetchPlaylist
+    fetchPlaylist,
+    queriedPlaylist
   } = useWorkoutPlaylist();
 
   // name of workout to add to playlist
@@ -27,18 +28,15 @@ const WorkoutListView = () => {
     setUserInput(tempData);
   };
 
-  // TODO: add searching functionality
+  // GET all playlists of the user
   const handleWorkoutOptions = async (event) => {
     event.preventDefault();
 
     try {
-      const response = await getPlaylist(userEmail);
-
-      if (response.status === 201) {
-        console.log(response);
-      }
+      await fetchPlaylist();
+      console.log(queriedPlaylist);
     } catch (error) {
-      console.error(error.message);
+      console.error(error);
     }
   };
 

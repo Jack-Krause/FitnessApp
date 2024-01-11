@@ -24,6 +24,10 @@ export const WorkoutPlaylistProvider = ( { children } ) => {
             throw error;
         }
     };
+
+    useEffect(() => {
+        fetchPlaylist();
+    });
     
     return (
         <WorkoutPlaylistContext.Provider
