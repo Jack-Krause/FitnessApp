@@ -74,10 +74,14 @@ const UserController = {
 
 			const user = await UserController.getUserByEmail(email);
 
-
 			if (!user) {
 				console.error("error getting user")
 				return res.status(404).send("unable to retrieve user");
+			}
+
+			if (!user.playlist || user.playlist.length <= 0) {
+				console.error("error with playlist");
+				return res.status(404).send("playlist doesn't exist");
 			}
 
 			res.status(201).send(user.playlist);
