@@ -72,7 +72,7 @@ export const postExercise = async (
 	}
 };
 
-export const getPlayList = async (userEmail) => {
+export const getPlaylist = async (userEmail) => {
 	try {
 		//call axios url
 		const response = axios.post(
@@ -89,7 +89,7 @@ export const getPlayList = async (userEmail) => {
 	}
 };
 
-export const addToPlayList = async (userEmail, workoutName) => {
+export const addToPlaylist = async (userEmail, workoutName) => {
 	try {
 		const response = axios.post(
 			"http://127.0.0.1:4000/workout/addtoplaylist",

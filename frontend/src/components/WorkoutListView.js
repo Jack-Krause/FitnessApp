@@ -5,12 +5,18 @@ import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import Col from "react-bootstrap/Col";
 import Nav from "react-bootstrap/Nav";
-import { getPlayList, addToPlayList } from "../api/requestMethods";
+import { getPlaylist, addToPlaylist } from "../api/requestMethods";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
+import { useWorkoutPlaylist } from "../contexts/WorkoutPlaylistProvider";
 
 const WorkoutListView = () => {
   // user email used in sign in/reg
   const { userEmail } = useAuthenticatedView();
+
+  const {
+    fetchPlaylist
+  } = useWorkoutPlaylist();
+
   // name of workout to add to playlist
   const [userInput, setUserInput] = useState("");
   // name of tab for visual effects
@@ -26,7 +32,7 @@ const WorkoutListView = () => {
     event.preventDefault();
 
     try {
-      const response = await getPlayList(userEmail);
+      const response = await getPlaylist(userEmail);
 
       if (response.status === 201) {
         console.log(response);
@@ -40,7 +46,7 @@ const WorkoutListView = () => {
 	event.preventDefault();
 
 	try {
-		const response = await addToPlayList(userEmail, userInput);
+		const response = await addToPlaylist(userEmail, userInput);
 		
 		if (response.status === 201) {
 			console.log(response);
