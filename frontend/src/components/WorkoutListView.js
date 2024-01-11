@@ -13,10 +13,7 @@ const WorkoutListView = () => {
   // user email used in sign in/reg
   const { userEmail } = useAuthenticatedView();
   // provider for using seeing, modifying, using playlists - add to this as needed
-  const {
-    fetchPlaylist,
-    queriedPlaylist
-  } = useWorkoutPlaylist();
+  const { fetchPlaylist, queriedPlaylist } = useWorkoutPlaylist();
 
   // name of workout to add to playlist
   const [userInput, setUserInput] = useState("");
@@ -40,18 +37,20 @@ const WorkoutListView = () => {
     }
   };
 
+  // post a new workout into the playlist TODO: add the exercises selected
+  // unique to this component so we don't need to run through the provider
   const handleNewWorkout = async (event) => {
-	event.preventDefault();
+    event.preventDefault();
 
-	try {
-		const response = await addToPlaylist(userEmail, userInput);
-		
-		if (response.status === 201) {
-			console.log(response);
-		}
-	} catch (error) {
-		console.error(error.message);
-	}
+    try {
+      const response = await addToPlaylist(userEmail, userInput);
+
+      if (response.status === 201) {
+        console.log(response);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
   };
 
   return (
