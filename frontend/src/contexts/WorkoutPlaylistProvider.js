@@ -16,14 +16,15 @@ export const WorkoutPlaylistProvider = ( { children } ) => {
     // allow completion of a workout from the playlist (POST) (workout: template -> data filled)
     
     const fetchPlaylist = async () => {
-        try {
-            const data = await getPlaylist(userEmail);
+        const dataPromise = getPlaylist(userEmail);
+        dataPromise
+        .then((data) => {
             setQueriedPlaylist(data);
-        } catch (error) {
+        })
+        .catch((error) => {
             console.error("[fetchPlaylist]", error);
-            throw error;
-        }
-    };
+        });
+    }
 
     useEffect(() => {
         fetchPlaylist();

@@ -53,7 +53,7 @@ const SignIn = () => {
   };
 
   // Send user info to api service (for POST request)
-  const handleSignIn = () => {
+  const handleSignIn = async () => {
     console.log(userData.email, userData.password);
 
     signIn(userData.email, userData.password)

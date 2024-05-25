@@ -3,33 +3,30 @@ import axios from "axios";
 
 // GET request to sign in user
 export const signIn = async (inputEmail, inputPassword) => {
-	try {
-		const response = await axios.post("http://127.0.0.1:4000/user/signin", {
-			email: inputEmail,
-			password: inputPassword,
-		});
-		return response;
-	} catch (err) {
-		console.error("[api] error", err);
-		throw err;
+	const response = await axios.post("http://127.0.0.1:4000/user/signin", {
+		email: inputEmail,
+		password: inputPassword,
+	});
+	if (! response.ok) {
+		throw new Error(`HTTP error: ${response.status}`);
 	}
+
+	return response;
 };
 
 // POST request to add user info
 export const register = async (inputEmail, inputPassword, inputName) => {
-	try {
-		console.log(inputEmail, inputPassword, inputName);
-		const response = await axios.post("http://127.0.0.1:4000/user/register", {
-			email: inputEmail,
-			password: inputPassword,
-			name: inputName,
-		});
+	const response = await axios.post("http://127.0.0.1:4000/user/register", {
+		email: inputPassword,
+		password: inputPassword,
+		name: inputName,
+	});
 
-		return response;
-	} catch (err) {
-		console.error("[api] error", err);
-		throw err;
+	if (! response.ok) {
+		throw new Error(`HTTP error: ${response.status}`);
 	}
+
+	return response;
 };
 
 // provides searching and browsing from public API
@@ -73,20 +70,17 @@ export const postExercise = async (
 };
 
 export const getPlaylist = async (userEmail) => {
-	try {
-		//call axios url
-		const response = axios.post(
-			"http://127.0.0.1:4000/user/getplaylist",
-			{
-				email: userEmail
-			}
-		);
-
-		return response;
-	} catch (err) {
-		console.error("[api error]", err);
-		return err;
+	const response = await axios.post(
+		"http://127.0.0.1:4000/user/getplaylist",
+		{
+			email: userEmail
+		}
+	);
+	if (! response.ok) {
+		throw new Error(`HTTP error: ${response.status}`);
 	}
+
+	return response;
 };
 
 export const addToPlaylist = async (userEmail, workoutName) => {
