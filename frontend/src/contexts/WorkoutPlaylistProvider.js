@@ -9,8 +9,8 @@ const WorkoutPlaylistContext = createContext();
 export const WorkoutPlaylistProvider = ( { children } ) => {
     // actual playlist retrieved from backend (basically a list of workout templates)
     const [queriedPlaylist, setQueriedPlaylist] = useState([]);
-    const userEmail = localStorage.getItem("userEmail");
-    const { userAuthenticated } = useAuthenticatedView();
+    // const userEmail = localStorage.getItem("userEmail");
+    const { userAuthenticated, userEmail } = useAuthenticatedView();
 
     // TODO: (functional requirements)
     // call retrieve user playlist (GET) (use api helper)

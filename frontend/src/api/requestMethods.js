@@ -22,7 +22,7 @@ export const register = async (inputEmail, inputPassword, inputName) => {
 		name: inputName,
 	});
 
-	if (! response.ok) {
+	if (! response.status == 200) {
 		throw new Error(`HTTP error: ${response.status}`);
 	}
 
@@ -76,7 +76,7 @@ export const getPlaylist = async (userEmail) => {
 			email: userEmail
 		}
 	);
-	if (! response.ok) {
+	if (! response.status == 200) {
 		throw new Error(`HTTP error: ${response.status}`);
 	}
 

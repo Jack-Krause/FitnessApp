@@ -45,7 +45,7 @@ const UserController = {
 
 			await userToPost.save();
 			// 201 status code: created
-			res.status(201).send("User creation success");
+			res.status(200).send("User creation success");
 		} catch (error) {
 			res.status(500).send(error.message);
 		}
@@ -53,15 +53,21 @@ const UserController = {
 
 	// retrieve a User instance by email
 	getUserByEmail: async (email) => {
-		const userResponse = await User.findOne( { email: email} )
-		.populate("exerciseLibrary")
-		.populate("playlist");
+		try {
+			console.log(`email is: ${email}`);
+			const userResponse = await User.findOne({ email: email })
+				.populate("exerciseLibrary")
+				.populate("playlist");
 
-		if (! userResponse) {
-			throw new Error("[getUserByEmail error]");
+				if (! userResponse) {
+					console.error("No user found");
+				}
+
+				return userResponse;
+		} catch (error) {
+			console.error(error.message);
+			throw error;
 		}
-
-		return userResponse;
 	},
 
 	// retrieve the user's workout template playlist
@@ -76,14 +82,14 @@ const UserController = {
 				return res.status(404).send("unable to retrieve user");
 			}
 
-			if (!user.playlist || user.playlist.length <= 0) {
+			if (!user.playlist || user.playlist.length === 0) {
 				console.error("error with playlist");
 				return res.status(404).send("playlist doesn't exist");
 			}
 
-			res.status(201).send(user.playlist);
+			res.status(200).send(user.playlist);
 		} catch (error) {
-			console.error(error);
+			console.error(error.message);
 			res.status(500).send(error.message);
 		}
 	},
