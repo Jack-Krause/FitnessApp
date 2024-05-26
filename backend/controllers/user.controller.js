@@ -53,22 +53,19 @@ const UserController = {
 
 	// retrieve a User instance by email
 	getUserByEmail: async (email) => {
-		try {
-			// call .populate() as needed
-			const user = await User.findOne({ email: email }).populate(
-				"exerciseLibrary"
-			).populate(
-				"playlist"
-			);
+		const userResponse = await User.findOne( { email: email} )
+		.populate("exerciseLibrary")
+		.populate("playlist");
 
-			return user;
-		} catch (error) {
+		if (! userResponse) {
 			throw new Error("[getUserByEmail error]");
 		}
+
+		return userResponse;
 	},
 
 	// retrieve the user's workout template playlist
-	getPlayList: async (req, res) => {
+	getPlaylist: async (req, res) => {
 		try {
 			const email = req.body.email;
 

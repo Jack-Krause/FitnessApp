@@ -70,7 +70,7 @@ export const postExercise = async (
 };
 
 export const getPlaylist = async (userEmail) => {
-	const response = await axios.post(
+	const response = await axios.get(
 		"http://127.0.0.1:4000/user/getplaylist",
 		{
 			email: userEmail

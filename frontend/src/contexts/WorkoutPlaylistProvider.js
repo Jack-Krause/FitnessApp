@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { getPlaylist } from "../api/requestMethods";
+import { useAuthenticatedView } from "./AuthenticatedViewProvider";
 
 const WorkoutPlaylistContext = createContext();
 
@@ -9,6 +10,7 @@ export const WorkoutPlaylistProvider = ( { children } ) => {
     // actual playlist retrieved from backend (basically a list of workout templates)
     const [queriedPlaylist, setQueriedPlaylist] = useState([]);
     const userEmail = localStorage.getItem("userEmail");
+    const { userAuthenticated } = useAuthenticatedView();
 
     // TODO: (functional requirements)
     // call retrieve user playlist (GET) (use api helper)
@@ -27,7 +29,9 @@ export const WorkoutPlaylistProvider = ( { children } ) => {
     }
 
     useEffect(() => {
-        fetchPlaylist();
+        if ( userAuthenticated ) {
+            fetchPlaylist();
+        }
     });
     
     return (

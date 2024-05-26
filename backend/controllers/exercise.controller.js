@@ -9,7 +9,7 @@ const ExerciseController = {
 
 			const user = await UserController.getUserByEmail(email);
 
-			if (!user) {
+			if (! user) {
 				return res.status(404).send("unable to retrieve user");
 			}
 
