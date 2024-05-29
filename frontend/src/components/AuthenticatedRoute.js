@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import { Router, Routes, Navigate, Route } from "react-router-dom";
 import { AuthenticatedViewProvider } from "../contexts/AuthenticatedViewProvider";
+import { WorkoutPlaylistProvider } from "../contexts/WorkoutPlaylistProvider";
 import NavHead from "./NavHead";
 import SignInNavHead from "./SignInNavHead";
 import { useAuthenticatedView } from "../contexts/AuthenticatedViewProvider";
@@ -15,7 +16,14 @@ const AuthenticatedRoute = () => {
 
   return (
     <Routes>
-      <Route path="/" element={userAuthenticated ? <Home /> : <SignIn />} />
+      <Route path="/"
+        element={
+          userAuthenticated ? (
+            <WorkoutPlaylistProvider>
+              <Home />
+            </WorkoutPlaylistProvider>
+          ) : (<SignIn />)
+        } />
     </Routes>
   );
 };
